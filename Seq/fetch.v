@@ -11,8 +11,8 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, ins_er, adr_er, hlt_er);
   output reg ins_er;            //Status condition for instruction invalidity
   output reg adr_er;            //Status condition for invalid address
   output reg hlt_er;            //Status condition for halt
-  reg [7:0] insmem[0:2047];     //2kB of instruction memory cause why not
-  reg [0:79] inst;              //10 byte max length for instruction
+  reg [7:0] insmem[2047:0];     //2kB of instruction memory cause why not
+  reg [79:0] inst;              //10 byte max length for instruction
 
   initial begin
     //Memory shiz
