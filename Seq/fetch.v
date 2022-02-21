@@ -1,4 +1,4 @@
-module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, ins_er, adr_er, hlt_er);
+module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_er);
 
   input clk;                    
   input [63:0] PC;
@@ -8,8 +8,8 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, ins_er, adr_er, hlt_er);
   output reg [3:0] rB; 
   output reg [63:0] valC;
   output reg [63:0] valP;
-  output reg ins_er;            //Status condition for instruction invalidity
-  output reg adr_er;            //Status condition for invalid address
+  output reg inst_valid;            //Status condition for instruction invalidity
+  output reg imem_er;            //Status condition for invalid address
   output reg hlt_er;            //Status condition for halt
   reg [7:0] insmem[2047:0];     //2kB of instruction memory cause why not
   reg [79:0] inst;              //10 byte max length for instruction
@@ -21,7 +21,7 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, ins_er, adr_er, hlt_er);
   always @(posedge clk) begin
 
       if(PC > 2047) begin
-        adr_er = 1;               //Invalid address, out of scope
+        imem_er = 1;               //Invalid address, out of scope
       end
 
       inst = insmem[PC:PC + 9];   //Fetching 10 bytes
@@ -29,7 +29,7 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, ins_er, adr_er, hlt_er);
       icode = inst[0:3];          //Instruction specifier
       ifun = inst[4:7];           //Function specifier for xx instructions
       
-      ins_er = 0;                 //Assume instruction is valid, default case will invalidate
+      inst_valid = 1;                 //Assume instruction is valid, default case will invalidate
       
       if(icode == 0) begin        //halt instruction encountered
         hlt_er = 1;
@@ -70,7 +70,7 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, ins_er, adr_er, hlt_er);
         rB = inst[12:15];
       end
       else begin
-        ins_er = 1;               //Invalid icode, hence invalid instruction
+        inst_valid = 0;               //Invalid icode, hence invalid instruction
       end
   end
 
