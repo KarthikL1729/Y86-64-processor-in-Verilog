@@ -18,7 +18,7 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_
     //Memory shiz
   end
 
-  always @(posedge clk) begin
+  always @(*) begin
 
       if(PC > 2047) begin
         imem_er = 1;               //Invalid address, out of scope

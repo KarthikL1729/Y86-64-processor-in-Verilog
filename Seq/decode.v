@@ -5,7 +5,7 @@ module decode(clk, icode, rA, rB, memA, memB, regArr, valA, valB);
     input reg [63:0] regArr[14:0];                          //8 byte values in the registers, stk is (%rsp)
     output reg [63:0] valA, valB;                           // regArr[14] is stack pointer  
 
-    always @(posedge clk) begin
+    always @(*) begin
         
         if (icode == 2) begin                               //cmovxx instruction encountered
             valA = regArr[rA];
