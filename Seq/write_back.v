@@ -1,6 +1,6 @@
-module write_back(clk, icode, rA, rB, regmem0, regmem1, regmem2, regmem3, regmem4, regmem5, regmem6, regmem7, regmem8, regmem9, regmem10, regmem11, regmem12, regmem13, regmem14, valA, valB, valM, valE);
+module write_back(clk, cnd, icode, rA, rB, regmem0, regmem1, regmem2, regmem3, regmem4, regmem5, regmem6, regmem7, regmem8, regmem9, regmem10, regmem11, regmem12, regmem13, regmem14, valA, valB, valM, valE);
 
-    input clk;
+    input clk, cnd;
     input [3:0] icode, rA, rB;
     input [63:0] regmem0, regmem1, regmem2, regmem3, regmem4, regmem5, regmem6, regmem7, regmem8, regmem9, regmem10, regmem11, regmem12, regmem13, regmem14;
     input [63:0] valA, valB, valM, valE;
@@ -29,8 +29,11 @@ module write_back(clk, icode, rA, rB, regmem0, regmem1, regmem2, regmem3, regmem
    
     always @(*) begin
         
-        if (icode == 2 || icode == 3 || icode == 6) begin               //cmovXXX, irmovq, OPq
+        if (icode == 2 && cnd == 1) begin                                           //cmovXXX 
             regArr[rB] = valE;
+        end
+        else if (icode == 3 || icode == 6) begin                        //irmovq, OPq
+            
         end
         else if (icode == 4 || icode == 7) begin                         //rmmovq, jXX
         end

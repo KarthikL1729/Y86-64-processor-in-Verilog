@@ -21,7 +21,7 @@ module processor;
     decode decode1(.clk(clk), .icode(icode), .rA(rA), .rB(rB), .regmem0(regmem0), .regmem1(regmem1), .regmem2(regmem2), .regmem3(regmem3), .regmem4(regmem4), .regmem5(regmem5), .regmem6(regmem6), .regmem7(regmem7), .regmem8(regmem8), .regmem9(regmem9), .regmem10(regmem10), .regmem11(regmem11), .regmem12(regmem12), .regmem13(regmem13), .regmem14(regmem14), .valA(valA), .valB(valB));
     execute execute1(.clk(clk), .icode(icode), .ifun(ifun), .valA(valA), .valB(valB), .valC(valC), .valE(valE), .zf(zf), .of(of), .sf(sf), .cnd(cnd));
     memory memory1(.clk(clk), .icode(icode), .valP(valP), .valA(valA), .valB(valB), .valE(valE), .valM(valM));
-    write_back write_back1(.clk(clk), .icode(icode), .rA(rA), .rB(rB), .regmem0(regmem0), .regmem1(regmem1), .regmem2(regmem2), .regmem3(regmem3), .regmem4(regmem4), .regmem5(regmem5), .regmem6(regmem6), .regmem7(regmem7), .regmem8(regmem8), .regmem9(regmem9), .regmem10(regmem10), .regmem11(regmem11), .regmem12(regmem12), .regmem13(regmem13), .regmem14(regmem14), .valA(valA), .valB(valB), .valM(valM), .valE(valE));
+    write_back write_back1(.clk(clk), .cnd(cnd), .icode(icode), .rA(rA), .rB(rB), .regmem0(regmem0), .regmem1(regmem1), .regmem2(regmem2), .regmem3(regmem3), .regmem4(regmem4), .regmem5(regmem5), .regmem6(regmem6), .regmem7(regmem7), .regmem8(regmem8), .regmem9(regmem9), .regmem10(regmem10), .regmem11(regmem11), .regmem12(regmem12), .regmem13(regmem13), .regmem14(regmem14), .valA(valA), .valB(valB), .valM(valM), .valE(valE));
     pc_update pc_update1(.clk(clk), .icode(icode), .PC(PC), .valP(valP), .valM(valM), .valC(valC), .cnd(cnd), .newPC(newPC));
 
     initial begin

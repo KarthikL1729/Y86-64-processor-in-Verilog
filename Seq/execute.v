@@ -35,6 +35,47 @@ module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
         end
         // Actual ALU part
         if (clk == 1) begin                                     // Execution
+            if (icode == 2) begin                               //cmovXX
+                opcode = 2'b00;
+                a = valA;
+                b = valB;
+                valE = res;
+                if (ifun == 0) begin
+                    cnd = 1;
+                end
+                else if (ifun == 1) begin
+                    cnd = (sf^of) | zf;
+                end
+                else if (ifun == 2) begin
+                    cnd = sf^of;
+                end
+                else if (ifun == 3) begin
+                    cnd = zf;
+                end
+                else if (ifun == 4) begin
+                    cnd = ~zf;
+                end
+                else if (ifun == 5) begin
+                    cnd = ~(sf^of);
+                end
+                else if (ifun == 6) begin
+                    cnd = ~(sf^of)&(~zf);
+                end
+            end
+            if (icode == 3) begin                               //irmovq
+                opcode = 2'b00;
+                a = valC;
+                b = 0;
+                valE = res;
+            end
+
+            if (icode == 4 || icode == 5) begin                 //rmmovq and mrmovq
+                opcode = 2'b00;
+                a = valC;
+                b = valB;
+                valE = res;
+            end
+
             if(icode == 6) begin                                // OPq
                 if (ifun == 0) begin                            // Add                          
                     opcode = 2'b00;
@@ -58,7 +99,42 @@ module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
                 end
                 valE = res;
             end
-            
+
+            if (icode == 7) begin                               //jXX
+                if (ifun == 0) begin
+                    cnd = 1;
+                end
+                else if (ifun == 1) begin
+                    cnd = (sf^of) | zf;
+                end
+                else if (ifun == 2) begin
+                    cnd = sf^of;
+                end
+                else if (ifun == 3) begin
+                    cnd = zf;
+                end
+                else if (ifun == 4) begin
+                    cnd = ~zf;
+                end
+                else if (ifun == 5) begin
+                    cnd = ~(sf^of);
+                end
+                else if (ifun == 6) begin
+                    cnd = ~(sf^of)&(~zf);
+                end
+            end
+            if (icode == 8 || icode == 10) begin            //call and pushq
+                opcode = 2'b01;
+                a = valB;
+                b = 8;
+                valE = res;
+            end
+            if (icode == 9 || icode == 11) begin            //ret and popq
+                opcode = 2'b00;
+                a = valB;
+                b = 8;
+                valE = res;
+            end
         end
     end
 
