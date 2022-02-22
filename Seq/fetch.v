@@ -39,6 +39,45 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_
 
       insmem[20] = 96;
       insmem[21] = 3;
+
+      insmem[22] = 96;
+      insmem[23] = 3;
+
+      insmem[24] = 64;
+      insmem[25] = 48;
+      insmem[26] = 0;
+      insmem[27] = 0;
+      insmem[28] = 0;
+      insmem[29] = 0;
+      insmem[30] = 0;
+      insmem[31] = 0;
+      insmem[32] = 0;
+      insmem[33] = 5;
+
+      insmem[34] =80;
+      insmem[35] = 32;
+      insmem[36] = 0;
+      insmem[37] = 0;
+      insmem[38] = 0;
+      insmem[39] = 0;
+      insmem[40] = 0;
+      insmem[41] = 0;
+      insmem[42] = 0;
+      insmem[43] = 5;
+
+      insmem[44] = 96;
+      insmem[45] = 2;
+
+      insmem[46] = 33;
+      insmem[47] = 32;
+
+      insmem[48] = 96;
+      insmem[49] = 32;
+
+      insmem[50] = 33;
+      insmem[51] = 0;
+
+      
   end
 
   always @(*) begin

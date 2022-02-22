@@ -22,7 +22,7 @@ module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
     end
 
     always @(*) begin                                           // Setting condition flags
-        if(clk == 1 && icode == 6) begin
+        if(icode == 6) begin
             if(zero == 0) begin                                 // Zero flag
                 zf = 1;
             end
@@ -33,12 +33,11 @@ module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
                 of = 1;
             end
         end
-        // Actual ALU part
-        if (clk == 1) begin                                     // Execution
+        // Actual ALU part                                     // Execution
             if (icode == 2) begin                               //cmovXX
                 opcode = 2'b00;
                 a = valA;
-                b = valB;
+                b = 0;
                 valE = res;
                 if (ifun == 0) begin
                     cnd = 1;
@@ -132,7 +131,6 @@ module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
                 b = 8;
                 valE = res;
             end
-        end
     end
 
 endmodule

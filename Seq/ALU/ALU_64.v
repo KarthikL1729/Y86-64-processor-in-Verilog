@@ -1,6 +1,6 @@
-`include "/home/karthik/Y86-64-processor-in-Verilog/Seq/ALU/And/and_64.v"
-`include "/home/karthik/Y86-64-processor-in-Verilog/Seq/ALU/Sub/sub_64.v"
-`include "/home/karthik/Y86-64-processor-in-Verilog/Seq/ALU/Xor/xor_64.v"
+`include "/home/ananya/Y86-64-processor-in-Verilog/Seq/ALU/And/and_64.v"
+`include "/home/ananya/Y86-64-processor-in-Verilog/Seq/ALU/Sub/sub_64.v"
+`include "/home/ananya/Y86-64-processor-in-Verilog/Seq/ALU/Xor/xor_64.v"
 module ALU_64(opcode, a, b, res, overflow, zero); 
 
     input signed [63:0] a, b;
