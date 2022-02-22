@@ -8,11 +8,11 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_
   output reg [3:0] rB; 
   output reg [63:0] valC;
   output reg [63:0] valP;
-  output reg inst_valid;            //Status condition for instruction invalidity
+  output reg inst_valid;         //Status condition for instruction invalidity
   output reg imem_er;            //Status condition for invalid address
-  output reg hlt_er;            //Status condition for halt
-  reg [7:0] insmem[2047:0];     //2kB of instruction memory cause why not
-  reg [0:79] inst;              //10 byte max length for instruction
+  output reg hlt_er;             //Status condition for halt
+  reg [7:0] insmem[2047:0];      //2kB of instruction memory cause why not
+  reg [0:79] inst;               //10 byte max length for instruction
 
   initial begin
       insmem[0] = 48;
@@ -137,7 +137,7 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_
   end
 
   always @(*) begin
-    $display("Instructions = %b", inst);
+    $display("Bits fetched = %b", inst);
   end
 
 endmodule

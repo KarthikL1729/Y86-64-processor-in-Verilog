@@ -1,4 +1,3 @@
-
 module decode(clk, icode, valAin, valBin, stkPt, valAout, valBout);
 
     input clk;
@@ -24,7 +23,7 @@ module decode(clk, icode, valAin, valBin, stkPt, valAout, valBout);
             valBout = valBin;
         end
         else if(icode == 8) begin                           //call
-            valBout = stkPt;                              //stk;
+            valBout = stkPt;                                //stk
         end          
         else if (icode == 9 || icode == 11) begin           //ret, popq
             valAout = stkPt;

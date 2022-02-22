@@ -8,8 +8,7 @@ module pc_update(clk, icode, PC, valP, valM, valC, cnd, newPC);
 
     always @(*) begin
         
-        if (icode == 2 || icode == 3 || icode == 4 || icode == 5 || icode == 6 || icode == 10 || icode == 11) begin     
-                                                                                    //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
+        if (icode == 2 || icode == 3 || icode == 4 || icode == 5 || icode == 6 || icode == 10 || icode == 11) begin                                                                          //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
             newPC = valP;
         end
         else if (icode == 7) begin                                                   //jXX

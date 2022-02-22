@@ -11,13 +11,11 @@ module processor;
     reg clk;
     reg [2:0] stat;                                             // AOK, Halt, Inst error
     reg [63:0] PC;
-    wire [63:0] valA, valB, valC, valE, valP, valM, newPC, stkpt, dataA, dataB, valAout, valBout, valAin, valBin, reg0, reg3;
+    wire [63:0] valA, valB, valC, valE, valP, valM, newPC, stkpt, dataA, dataB, valAout, valBout, valAin, valBin;// reg0, reg3;
     wire cnd, inst_valid, imem_er, hlt_er, zf, sf, of;
     wire [3:0] icode, ifun, rA, rB, dstA, dstB;
     wire [63:0] datamem[2047:0];
     reg [7:0] insmem[2047:0];
-
-
 
     initial begin
 
@@ -34,7 +32,6 @@ module processor;
 
     end
 
-
     fetch fetch1(.clk(clk), .PC(PC), .icode(icode), .ifun(ifun), .rA(rA), .rB(rB), .valC(valC), .valP(valP), .inst_valid(inst_valid), .imem_er(imem_er), .hlt_er(hlt_er));
     regarr regArr(.PC(PC), .rA(rA), .rB(rB), .valA(valA), .valB(valB), .valStk(stkpt), .dstA(dstA), .dstB(dstB), .wrtA(dataA), .wrtB(dataB));
     decode decode1(.clk(clk), .icode(icode), .valAin(valA), .valBin(valB), .stkPt(stkpt), .valAout(valAout), .valBout(valBout));
@@ -45,7 +42,7 @@ module processor;
 
     always @(posedge clk) begin
         
-        $display("Hibro");
+        //$display("Hibro");
         PC = newPC;
 
         if (inst_valid) begin
@@ -72,7 +69,7 @@ module processor;
     always #1 clk=~clk;
 
     always @(*) begin
-        $monitor("clk=%d, icode=%d, ifun=%d, rA=%d, rB=%d, valA=%d, valB=%d, valC=%d, valE=%d, valM=%d, valP=%d, inst_valid=%d, imem_er=%d, hlt_er=%d, cnd=%d, dstA = %d, wrtA=%d, dstB = %d, wrtB = %d, reg0 = %d, reg3 = %d", clk, icode, ifun, rA, rB, valAout, valBout, valC, valE, valM, valP, inst_valid, imem_er, hlt_er, cnd, dstA, dataA, dstB, dataB, reg0, reg3);
+        $monitor("clk=%d, icode=%d, ifun=%d, rA=%d, rB=%d, valA=%d, valB=%d, valC=%d, valE=%d, valM=%d, valP=%d, inst_valid=%d, imem_er=%d, hlt_er=%d, cnd=%d, dstA = %d, wrtA=%d, dstB = %d, wrtB = %d", clk, icode, ifun, rA, rB, valAout, valBout, valC, valE, valM, valP, inst_valid, imem_er, hlt_er, cnd, dstA, dataA, dstB, dataB);//, reg0, reg3);
         //$monitor("inst1_1 = %b, 2 = %b, 3 = %b, 4 = %b, 5 = %b, 6 = %b, 7 = %b, 8 = %b, 9 =  %b, 10 = %b", insmem[0], insmem[1], insmem[2], insmem[3], insmem[4], insmem[5], insmem[6], insmem[7], insmem[8], insmem[9]);
     end
 

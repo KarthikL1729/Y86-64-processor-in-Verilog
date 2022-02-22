@@ -2,7 +2,7 @@ module regarr(PC, rA, rB, valA, valB, valStk, dstA, dstB, wrtA, wrtB);
     input [63:0] PC;
     input [3:0] rA, rB, dstA, dstB;
     input [63:0] wrtA, wrtB;
-    output [63:0] reg0, reg3;
+    //output [63:0] reg0, reg3;
     //input rw;       //0 for read and 1 for write
 
     output reg [63:0] valA, valB, valStk;

@@ -6,12 +6,10 @@ module write_back(clk, cnd, icode, rA, rB, valM, valE, dstA, dstB, dataA, dataB)
     output reg [3:0] dstA, dstB;
     output reg [63:0] dataA, dataB;
 
-    reg [63:0] regArr[14:0];
-
    
     always @(*) begin
         
-        if (icode == 2 && cnd == 1) begin                                           //cmovXXX 
+        if (icode == 2 && cnd == 1) begin                               //cmovXXX 
             //regArr[rB] = valE;
             dstA = rB;
             dataA = valE;
