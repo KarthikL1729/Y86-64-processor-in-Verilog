@@ -10,18 +10,18 @@ module processor;
     reg clk;
     reg [2:0] stat;                                             // AOK, Halt, Inst error
     reg [63:0] PC;
+    reg [63:0] regmem0, regmem1, regmem2, regmem3, regmem4, regmem5, regmem6, regmem7, regmem8, regmem9, regmem10, regmem11, regmem12, regmem13, regmem14;
     wire [63:0] valA, valB, valC, valE, valP, valM, newPC;
     wire cnd, inst_valid, imem_er, hlt_er, zf, sf, of;
     wire [3:0] icode, ifun, rA, rB;
-    wire [63:0] regArr[14:0];
     wire [63:0] datamem[2047:0];
-    wire [7:0] insmem[2047:0];
+    reg [7:0] insmem[2047:0];
 
     fetch fetch1(.clk(clk), .PC(PC), .icode(icode), .ifun(ifun), .rA(rA), .rB(rB), .valC(valC), .valP(valP), .inst_valid(inst_valid), .imem_er(imem_er), .hlt_er(hlt_er));
-    decode decode1(.clk(clk), .icode(icode), .rA(rA), .rB(rB), .memA(memA), .memB(memB), .regArr(regArr), .valA(valA), .valB(valB));
-    execute execute1(.clk(clk), .PC(PC), .icode(icode), .ifun(ifun), .valA(valA), .valB(valB), .valC(valC), .valE(valE), .zf(zf), .of(of), .sf(sf), .cnd(cnd));
-    memory memory1(.clk(clk), .icode(icode), .valP(valP), .valA(valA), .valB(valB), .valE(valE), .valM(valM), .datamem(datamem));
-    write_back write_back1(.clk(clk), .icode(icode), .rA(rA), .rB(rB), .valA(valA), .valB(valB), .valM(valM), .valE(valE));
+    decode decode1(.clk(clk), .icode(icode), .rA(rA), .rB(rB), .regmem0(regmem0), .regmem1(regmem1), .regmem2(regmem2), .regmem3(regmem3), .regmem4(regmem4), .regmem5(regmem5), .regmem6(regmem6), .regmem7(regmem7), .regmem8(regmem8), .regmem9(regmem9), .regmem10(regmem10), .regmem11(regmem11), .regmem12(regmem12), .regmem13(regmem13), .regmem14(regmem14), .valA(valA), .valB(valB));
+    execute execute1(.clk(clk), .icode(icode), .ifun(ifun), .valA(valA), .valB(valB), .valC(valC), .valE(valE), .zf(zf), .of(of), .sf(sf), .cnd(cnd));
+    memory memory1(.clk(clk), .icode(icode), .valP(valP), .valA(valA), .valB(valB), .valE(valE), .valM(valM));
+    write_back write_back1(.clk(clk), .icode(icode), .rA(rA), .rB(rB), .regmem0(regmem0), .regmem1(regmem1), .regmem2(regmem2), .regmem3(regmem3), .regmem4(regmem4), .regmem5(regmem5), .regmem6(regmem6), .regmem7(regmem7), .regmem8(regmem8), .regmem9(regmem9), .regmem10(regmem10), .regmem11(regmem11), .regmem12(regmem12), .regmem13(regmem13), .regmem14(regmem14), .valA(valA), .valB(valB), .valM(valM), .valE(valE));
     pc_update pc_update1(.clk(clk), .icode(icode), .PC(PC), .valP(valP), .valM(valM), .valC(valC), .cnd(cnd), .newPC(newPC));
 
     initial begin
@@ -35,9 +35,52 @@ module processor;
         stat[2] = 0;
         PC = 0;
 
+        regmem0 = 0;
+        regmem1 = 0;
+        regmem2 = 0;
+        regmem3 = 0;
+        regmem4 = 0;
+        regmem5 = 0;
+        regmem6 = 0;
+        regmem7 = 0;
+        regmem8 = 0;
+        regmem9 = 0;
+        regmem10 = 0;
+        regmem11 = 0;
+        regmem12 = 0;
+        regmem13 = 0;
+        regmem14 = 0;
+
+        insmem[0] = 48;
+        insmem[1] = 240;
+        insmem[2] = 4;
+        insmem[3] = 0;
+        insmem[4] = 0;
+        insmem[5] = 0;
+        insmem[6] = 0;
+        insmem[7] = 0;
+        insmem[8] = 0;
+        insmem[9] = 0;
+
+        insmem[10] = 48;
+        insmem[11] = 243;
+        insmem[12] = 10;
+        insmem[13] = 0;
+        insmem[14] = 0;
+        insmem[15] = 0;
+        insmem[16] = 0;
+        insmem[17] = 0;
+        insmem[18] = 0;
+        insmem[19] = 0;
+
+        insmem[20] = 96;
+        insmem[21] = 3;
+
+        #5 $finish;
+
     end
 
-    always @(*) begin
+    always @(posedge clk) begin
         PC=newPC;
 
         if (inst_valid) begin
@@ -64,7 +107,7 @@ module processor;
     always #1 clk=~clk;
 
     initial begin
-        $monitor("clk=%d, icode=%d, ifun=%d, rA=%d, rB=%d, valA=%d, valB=%d, valC=%d, valE=%d, valM=%d, valP=%d, inst_valid=%d, mem_er=%d, hlt_er=%d, cnd=%d", clk, icode, ifun, rA, rB, valA, valB, valC, valE, valM, valP, inst_valid, mem_er, hlt_er, cnd);
+        $monitor("clk=%d, icode=%d, ifun=%d, rA=%d, rB=%d, valA=%d, valB=%d, valC=%d, valE=%d, valM=%d, valP=%d, inst_valid=%d, imem_er=%d, hlt_er=%d, cnd=%d", clk, icode, ifun, rA, rB, valA, valB, valC, valE, valM, valP, inst_valid, imem_er, hlt_er, cnd);
     end
 
 endmodule

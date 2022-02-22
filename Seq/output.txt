@@ -1,0 +1,7 @@
+VCD info: dumpfile processor.vcd opened for output.
+clk=0, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+clk=1, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+clk=0, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+clk=1, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+clk=0, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+clk=1, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x

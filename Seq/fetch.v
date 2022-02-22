@@ -12,7 +12,7 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_
   output reg imem_er;            //Status condition for invalid address
   output reg hlt_er;            //Status condition for halt
   reg [7:0] insmem[2047:0];     //2kB of instruction memory cause why not
-  reg [79:0] inst;              //10 byte max length for instruction
+  reg [0:79] inst;              //10 byte max length for instruction
 
   initial begin
     //Memory shiz
@@ -24,7 +24,7 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_
         imem_er = 1;               //Invalid address, out of scope
       end
 
-      inst = insmem[PC:PC + 9];   //Fetching 10 bytes
+      inst = {insmem[PC], insmem[PC + 1], insmem[PC + 2], insmem[PC + 3], insmem[PC + 4], insmem[PC + 5], insmem[PC + 6], insmem[PC + 7], insmem[PC + 8], insmem[PC + 9]};   //Fetching 10 bytes
       
       icode = inst[0:3];          //Instruction specifier
       ifun = inst[4:7];           //Function specifier for xx instructions

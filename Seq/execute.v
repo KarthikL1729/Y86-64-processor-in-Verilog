@@ -1,12 +1,12 @@
-`include "../ALU/ALU/ALU_64.v"
+`include "ALU/ALU_64.v"
 
-module execute(clk, PC, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
+module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
 
     input clk;
     input [3:0] icode, ifun;
     input [63:0] valA, valB, valC;
-    output [63:0] valE;
-    output cnd, zf, of, sf;                                     // cnd is conditional move/jump flag
+    output reg [63:0] valE;
+    output reg cnd, zf, of, sf;                                     // cnd is conditional move/jump flag
 
     reg signed [63:0] a, b;
     reg [1:0] opcode;
@@ -29,8 +29,8 @@ module execute(clk, PC, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
             if (res < 0) begin                                  // Sign flag
                 sf = 1;
             end
-            if ((a < 0 == b < 0) && (res < 0 != a < 0)) begin   // Carry flag
-                cf = 1;
+            if ((a < 0 == b < 0) && (res < 0 != a < 0)) begin   // Overflow flag
+                of = 1;
             end
         end
         // Actual ALU part

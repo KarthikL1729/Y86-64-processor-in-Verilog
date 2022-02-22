@@ -1,11 +1,11 @@
-module memory(clk, icode, valP, valA, valB, valE, valM, datamem);
+module memory(clk, icode, valP, valA, valB, valE, valM);
 
     input clk;
     input [3:0] icode;
     input [63:0] valA, valB, valE, valP;
 
-    output [63:0] valM;                                                         
-    output [63:0] datamem [2047:0];                                               //Data memory 2048*8 bytes
+    output reg [63:0] valM;                                                         
+    reg [63:0] datamem [2047:0];                                               //Data memory 2048*8 bytes
 
     always @(*) begin
         
@@ -20,7 +20,7 @@ module memory(clk, icode, valP, valA, valB, valE, valM, datamem);
         else if (icode == 8) begin                                                //call                  
             datamem[valE] = valP;
         end
-        else if (icode == 9, icode == 11) begin                                   //ret, popq          
+        else if (icode == 9 || icode == 11) begin                                   //ret, popq          
            valM = datamem[valA]; 
         end
 

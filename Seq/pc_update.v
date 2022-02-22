@@ -4,7 +4,7 @@ module pc_update(clk, icode, PC, valP, valM, valC, cnd, newPC);
     input [3:0] icode;
     input [63:0] valP, valM, valC, PC;
 
-    output [63:0] newPC;                                                            //Updated PC value
+    output reg [63:0] newPC;                                                            //Updated PC value
 
     always @(posedge clk) begin
         
@@ -12,7 +12,7 @@ module pc_update(clk, icode, PC, valP, valM, valC, cnd, newPC);
                                                                                     //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
             newPC = valP;
         end
-        else if (icode = 7) begin                                                   //jXX
+        else if (icode == 7) begin                                                   //jXX
             if (cnd == 1) begin
                 newPC = valC;
             end
