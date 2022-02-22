@@ -1,7 +1,21 @@
 VCD info: dumpfile processor.vcd opened for output.
-clk=0, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
-clk=1, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
-clk=0, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
-clk=1, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
-clk=0, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
-clk=1, icode= x, ifun= x, rA= x, rB= x, valA=                   x, valB=                   x, valC=                   x, valE=                   x, valM=                   x, valP=                   x, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+Instructions = 00110000111100000000000000000000000000000000000000000000000000000000000000000100
+clk=1, icode= 3, ifun= 0, rA=15, rB= 0, valA=                   x, valB=                   x, valC=                   4, valE=                   4, valM=                   x, valP=                  10, inst_valid=1, imem_er=x, hlt_er=x, cnd=x
+clk=0, icode= 3, ifun= 0, rA=15, rB= 0, valA=                   x, valB=                   x, valC=                   4, valE=                   4, valM=                   x, valP=                  10, inst_valid=1, imem_er=x, hlt_er=x, cnd=x
+Hibro
+Instructions = 00110000111100110000000000000000000000000000000000000000000000000000000000001010
+clk=1, icode= 3, ifun= 0, rA=15, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                  10, valM=                   x, valP=                  20, inst_valid=1, imem_er=x, hlt_er=x, cnd=x
+clk=0, icode= 3, ifun= 0, rA=15, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                  10, valM=                   x, valP=                  20, inst_valid=1, imem_er=x, hlt_er=x, cnd=x
+Hibro
+Instructions = 0110000000000011xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+clk=1, icode= 6, ifun= 0, rA= 0, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                   x, valM=                   x, valP=                  22, inst_valid=1, imem_er=x, hlt_er=x, cnd=x
+clk=0, icode= 6, ifun= 0, rA= 0, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                   x, valM=                   x, valP=                  22, inst_valid=1, imem_er=x, hlt_er=x, cnd=x
+Hibro
+Instructions = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+clk=1, icode= x, ifun= x, rA= 0, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                   x, valM=                   x, valP=                  22, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+clk=0, icode= x, ifun= x, rA= 0, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                   x, valM=                   x, valP=                  22, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+Hibro
+clk=1, icode= x, ifun= x, rA= 0, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                   x, valM=                   x, valP=                  22, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+clk=0, icode= x, ifun= x, rA= 0, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                   x, valM=                   x, valP=                  22, inst_valid=0, imem_er=x, hlt_er=x, cnd=x
+Hibro
+clk=1, icode= x, ifun= x, rA= 0, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                   x, valM=                   x, valP=                  22, inst_valid=0, imem_er=x, hlt_er=x, cnd=x

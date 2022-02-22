@@ -63,10 +63,7 @@ module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
                 end
             end
             if (icode == 3) begin                               //irmovq
-                opcode = 2'b00;
-                a = valC;
-                b = 0;
-                valE = res;
+                valE = valC;
             end
 
             if (icode == 4 || icode == 5) begin                 //rmmovq and mrmovq

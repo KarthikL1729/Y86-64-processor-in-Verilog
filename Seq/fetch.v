@@ -15,7 +15,30 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_
   reg [0:79] inst;              //10 byte max length for instruction
 
   initial begin
-    //Memory shiz
+      insmem[0] = 48;
+      insmem[1] = 240;
+      insmem[2] = 0;
+      insmem[3] = 0;
+      insmem[4] = 0;
+      insmem[5] = 0;
+      insmem[6] = 0;
+      insmem[7] = 0;
+      insmem[8] = 0;
+      insmem[9] = 4;
+
+      insmem[10] = 48;
+      insmem[11] = 243;
+      insmem[12] = 0;
+      insmem[13] = 0;
+      insmem[14] = 0;
+      insmem[15] = 0;
+      insmem[16] = 0;
+      insmem[17] = 0;
+      insmem[18] = 0;
+      insmem[19] = 10;
+
+      insmem[20] = 96;
+      insmem[21] = 3;
   end
 
   always @(*) begin
@@ -72,6 +95,10 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_
       else begin
         inst_valid = 0;               //Invalid icode, hence invalid instruction
       end
+  end
+
+  always @(*) begin
+    $display("Instructions = %b", inst);
   end
 
 endmodule

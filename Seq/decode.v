@@ -2,12 +2,13 @@ module decode(clk, icode, rA, rB, regmem0, regmem1, regmem2, regmem3, regmem4, r
 
     input clk;
     input [3:0] icode, rA, rB;   
-    input [63:0] regmem0, regmem1, regmem2, regmem3, regmem4, regmem5, regmem6, regmem7, regmem8, regmem9, regmem10, regmem11, regmem12, regmem13, regmem14;
+    output reg [63:0] regmem0, regmem1, regmem2, regmem3, regmem4, regmem5, regmem6, regmem7, regmem8, regmem9, regmem10, regmem11, regmem12, regmem13, regmem14;
     reg [63:0] regArr[14:0];                         
     //8 byte values in the registers, stk is (%rsp)
     output reg [63:0] valA, valB;                           // regArr[14] is stack pointer  
 
-    initial begin
+
+    always @(*) begin
         
         regArr[0] = regmem0;
         regArr[1] = regmem1;
@@ -24,11 +25,7 @@ module decode(clk, icode, rA, rB, regmem0, regmem1, regmem2, regmem3, regmem4, r
         regArr[12] = regmem12;
         regArr[13] = regmem13; 
         regArr[14] = regmem14;
-         
-    end
 
-    always @(*) begin
-        
         if (icode == 2) begin                               //cmovxx instruction encountered
             valA = regArr[rA];
             valB = 0;
@@ -54,5 +51,21 @@ module decode(clk, icode, rA, rB, regmem0, regmem1, regmem2, regmem3, regmem4, r
             valB = regArr[14];
         end
         
+        regmem0 = regArr[0];
+        regmem1 = regArr[1];
+        regmem2 = regArr[2];
+        regmem3 = regArr[3];
+        regmem4 = regArr[4];
+        regmem5 = regArr[5];
+        regmem6 = regArr[6];
+        regmem7 = regArr[7];
+        regmem8 = regArr[8];
+        regmem9 = regArr[9];
+        regmem10 = regArr[10];
+        regmem11 = regArr[11];
+        regmem12 = regArr[12];
+        regmem13 = regArr[13]; 
+        regmem14 = regArr[14];
+
     end
 endmodule

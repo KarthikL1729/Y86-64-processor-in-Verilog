@@ -6,7 +6,7 @@ module pc_update(clk, icode, PC, valP, valM, valC, cnd, newPC);
 
     output reg [63:0] newPC;                                                            //Updated PC value
 
-    always @(posedge clk) begin
+    always @(*) begin
         
         if (icode == 2 || icode == 3 || icode == 4 || icode == 5 || icode == 6 || icode == 10 || icode == 11) begin     
                                                                                     //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq

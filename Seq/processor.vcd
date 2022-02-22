@@ -1,5 +1,5 @@
 $date
-	Tue Feb 22 09:02:37 2022
+	Tue Feb 22 12:06:53 2022
 $end
 $version
 	Icarus Verilog
@@ -8,67 +8,67 @@ $timescale
 	1s
 $end
 $scope module processor $end
-$var wire 1 ! zf $end
-$var wire 64 " valP [63:0] $end
-$var wire 64 # valM [63:0] $end
-$var wire 64 $ valE [63:0] $end
-$var wire 64 % valC [63:0] $end
-$var wire 64 & valB [63:0] $end
-$var wire 64 ' valA [63:0] $end
-$var wire 1 ( sf $end
-$var wire 4 ) rB [3:0] $end
-$var wire 4 * rA [3:0] $end
-$var wire 1 + of $end
-$var wire 64 , newPC [63:0] $end
-$var wire 1 - inst_valid $end
-$var wire 1 . imem_er $end
-$var wire 4 / ifun [3:0] $end
-$var wire 4 0 icode [3:0] $end
-$var wire 1 1 hlt_er $end
-$var wire 1 2 cnd $end
-$var reg 64 3 PC [63:0] $end
-$var reg 1 4 clk $end
-$var reg 64 5 regmem0 [63:0] $end
-$var reg 64 6 regmem1 [63:0] $end
-$var reg 64 7 regmem10 [63:0] $end
-$var reg 64 8 regmem11 [63:0] $end
-$var reg 64 9 regmem12 [63:0] $end
-$var reg 64 : regmem13 [63:0] $end
-$var reg 64 ; regmem14 [63:0] $end
-$var reg 64 < regmem2 [63:0] $end
-$var reg 64 = regmem3 [63:0] $end
-$var reg 64 > regmem4 [63:0] $end
-$var reg 64 ? regmem5 [63:0] $end
-$var reg 64 @ regmem6 [63:0] $end
-$var reg 64 A regmem7 [63:0] $end
-$var reg 64 B regmem8 [63:0] $end
-$var reg 64 C regmem9 [63:0] $end
+$var wire 64 ! regmem0 [63:0] $end
+$var wire 64 " regmem1 [63:0] $end
+$var wire 64 # regmem10 [63:0] $end
+$var wire 64 $ regmem11 [63:0] $end
+$var wire 64 % regmem12 [63:0] $end
+$var wire 64 & regmem13 [63:0] $end
+$var wire 64 ' regmem14 [63:0] $end
+$var wire 64 ( regmem2 [63:0] $end
+$var wire 64 ) regmem3 [63:0] $end
+$var wire 64 * regmem4 [63:0] $end
+$var wire 64 + regmem5 [63:0] $end
+$var wire 64 , regmem6 [63:0] $end
+$var wire 64 - regmem7 [63:0] $end
+$var wire 64 . regmem8 [63:0] $end
+$var wire 64 / regmem9 [63:0] $end
+$var wire 1 0 zf $end
+$var wire 64 1 valP [63:0] $end
+$var wire 64 2 valM [63:0] $end
+$var wire 64 3 valE [63:0] $end
+$var wire 64 4 valC [63:0] $end
+$var wire 64 5 valB [63:0] $end
+$var wire 64 6 valA [63:0] $end
+$var wire 1 7 sf $end
+$var wire 4 8 rB [3:0] $end
+$var wire 4 9 rA [3:0] $end
+$var wire 1 : of $end
+$var wire 64 ; newPC [63:0] $end
+$var wire 1 < inst_valid $end
+$var wire 1 = imem_er $end
+$var wire 4 > ifun [3:0] $end
+$var wire 4 ? icode [3:0] $end
+$var wire 1 @ hlt_er $end
+$var wire 1 A cnd $end
+$var reg 64 B PC [63:0] $end
+$var reg 1 C clk $end
 $var reg 3 D stat [2:0] $end
 $scope module decode1 $end
-$var wire 1 4 clk $end
-$var wire 64 E regmem0 [63:0] $end
-$var wire 64 F regmem1 [63:0] $end
-$var wire 64 G regmem10 [63:0] $end
-$var wire 64 H regmem11 [63:0] $end
-$var wire 64 I regmem12 [63:0] $end
-$var wire 64 J regmem13 [63:0] $end
-$var wire 64 K regmem14 [63:0] $end
-$var wire 64 L regmem2 [63:0] $end
-$var wire 64 M regmem3 [63:0] $end
-$var wire 64 N regmem4 [63:0] $end
-$var wire 64 O regmem5 [63:0] $end
-$var wire 64 P regmem6 [63:0] $end
-$var wire 64 Q regmem7 [63:0] $end
-$var wire 64 R regmem8 [63:0] $end
-$var wire 64 S regmem9 [63:0] $end
-$var wire 4 T rB [3:0] $end
-$var wire 4 U rA [3:0] $end
-$var wire 4 V icode [3:0] $end
+$var wire 1 C clk $end
+$var wire 4 E rB [3:0] $end
+$var wire 4 F rA [3:0] $end
+$var wire 4 G icode [3:0] $end
+$var reg 64 H regmem0 [63:0] $end
+$var reg 64 I regmem1 [63:0] $end
+$var reg 64 J regmem10 [63:0] $end
+$var reg 64 K regmem11 [63:0] $end
+$var reg 64 L regmem12 [63:0] $end
+$var reg 64 M regmem13 [63:0] $end
+$var reg 64 N regmem14 [63:0] $end
+$var reg 64 O regmem2 [63:0] $end
+$var reg 64 P regmem3 [63:0] $end
+$var reg 64 Q regmem4 [63:0] $end
+$var reg 64 R regmem5 [63:0] $end
+$var reg 64 S regmem6 [63:0] $end
+$var reg 64 T regmem7 [63:0] $end
+$var reg 64 U regmem8 [63:0] $end
+$var reg 64 V regmem9 [63:0] $end
 $var reg 64 W valA [63:0] $end
 $var reg 64 X valB [63:0] $end
 $upscope $end
 $scope module execute1 $end
-$var wire 1 4 clk $end
+$var wire 1 C clk $end
 $var wire 64 Y valA [63:0] $end
 $var wire 64 Z valB [63:0] $end
 $var wire 1 [ zero $end
@@ -79,12 +79,12 @@ $var wire 4 _ ifun [3:0] $end
 $var wire 4 ` icode [3:0] $end
 $var reg 64 a a [63:0] $end
 $var reg 64 b b [63:0] $end
-$var reg 1 2 cnd $end
-$var reg 1 + of $end
+$var reg 1 A cnd $end
+$var reg 1 : of $end
 $var reg 2 c opcode [1:0] $end
-$var reg 1 ( sf $end
+$var reg 1 7 sf $end
 $var reg 64 d valE [63:0] $end
-$var reg 1 ! zf $end
+$var reg 1 0 zf $end
 $scope module alu $end
 $var wire 64 e a [63:0] $end
 $var wire 64 f b [63:0] $end
@@ -5138,20 +5138,20 @@ $upscope $end
 $upscope $end
 $scope module fetch1 $end
 $var wire 64 M2 PC [63:0] $end
-$var wire 1 4 clk $end
-$var reg 1 1 hlt_er $end
+$var wire 1 C clk $end
+$var reg 1 @ hlt_er $end
 $var reg 4 N2 icode [3:0] $end
 $var reg 4 O2 ifun [3:0] $end
-$var reg 1 . imem_er $end
+$var reg 1 = imem_er $end
 $var reg 80 P2 inst [0:79] $end
-$var reg 1 - inst_valid $end
+$var reg 1 < inst_valid $end
 $var reg 4 Q2 rA [3:0] $end
 $var reg 4 R2 rB [3:0] $end
 $var reg 64 S2 valC [63:0] $end
 $var reg 64 T2 valP [63:0] $end
 $upscope $end
 $scope module memory1 $end
-$var wire 1 4 clk $end
+$var wire 1 C clk $end
 $var wire 4 U2 icode [3:0] $end
 $var wire 64 V2 valA [63:0] $end
 $var wire 64 W2 valB [63:0] $end
@@ -5161,8 +5161,8 @@ $var reg 64 Z2 valM [63:0] $end
 $upscope $end
 $scope module pc_update1 $end
 $var wire 64 [2 PC [63:0] $end
-$var wire 1 4 clk $end
-$var wire 1 2 cnd $end
+$var wire 1 C clk $end
+$var wire 1 A cnd $end
 $var wire 4 \2 icode [3:0] $end
 $var wire 64 ]2 valC [63:0] $end
 $var wire 64 ^2 valM [63:0] $end
@@ -5170,29 +5170,30 @@ $var wire 64 _2 valP [63:0] $end
 $var reg 64 `2 newPC [63:0] $end
 $upscope $end
 $scope module write_back1 $end
-$var wire 1 4 clk $end
+$var wire 1 C clk $end
+$var wire 1 A cnd $end
 $var wire 4 a2 icode [3:0] $end
 $var wire 4 b2 rA [3:0] $end
 $var wire 4 c2 rB [3:0] $end
-$var wire 64 d2 regmem0 [63:0] $end
-$var wire 64 e2 regmem1 [63:0] $end
-$var wire 64 f2 regmem10 [63:0] $end
-$var wire 64 g2 regmem11 [63:0] $end
-$var wire 64 h2 regmem12 [63:0] $end
-$var wire 64 i2 regmem13 [63:0] $end
-$var wire 64 j2 regmem14 [63:0] $end
-$var wire 64 k2 regmem2 [63:0] $end
-$var wire 64 l2 regmem3 [63:0] $end
-$var wire 64 m2 regmem4 [63:0] $end
-$var wire 64 n2 regmem5 [63:0] $end
-$var wire 64 o2 regmem6 [63:0] $end
-$var wire 64 p2 regmem7 [63:0] $end
-$var wire 64 q2 regmem8 [63:0] $end
-$var wire 64 r2 regmem9 [63:0] $end
-$var wire 64 s2 valA [63:0] $end
-$var wire 64 t2 valB [63:0] $end
-$var wire 64 u2 valE [63:0] $end
-$var wire 64 v2 valM [63:0] $end
+$var wire 64 d2 valA [63:0] $end
+$var wire 64 e2 valB [63:0] $end
+$var wire 64 f2 valE [63:0] $end
+$var wire 64 g2 valM [63:0] $end
+$var reg 64 h2 regmem0 [63:0] $end
+$var reg 64 i2 regmem1 [63:0] $end
+$var reg 64 j2 regmem10 [63:0] $end
+$var reg 64 k2 regmem11 [63:0] $end
+$var reg 64 l2 regmem12 [63:0] $end
+$var reg 64 m2 regmem13 [63:0] $end
+$var reg 64 n2 regmem14 [63:0] $end
+$var reg 64 o2 regmem2 [63:0] $end
+$var reg 64 p2 regmem3 [63:0] $end
+$var reg 64 q2 regmem4 [63:0] $end
+$var reg 64 r2 regmem5 [63:0] $end
+$var reg 64 s2 regmem6 [63:0] $end
+$var reg 64 t2 regmem7 [63:0] $end
+$var reg 64 u2 regmem8 [63:0] $end
+$var reg 64 v2 regmem9 [63:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
@@ -5202,43 +5203,43 @@ bx v2
 bx u2
 bx t2
 bx s2
-b0 r2
-b0 q2
-b0 p2
-b0 o2
-b0 n2
-b0 m2
-b0 l2
-b0 k2
-b0 j2
-b0 i2
-b0 h2
-b0 g2
-b0 f2
-b0 e2
-b0 d2
-bx c2
-bx b2
-bx a2
-bx `2
-bx _2
+bx r2
+bx q2
+bx p2
+bx o2
+bx n2
+bx m2
+bx l2
+bx k2
+bx j2
+bx i2
+b100 h2
+bx g2
+b100 f2
+bx e2
+bx d2
+b0 c2
+b1111 b2
+b11 a2
+b1010 `2
+b1010 _2
 bx ^2
-bx ]2
-bx \2
+b100 ]2
+b11 \2
 b0 [2
 bx Z2
-bx Y2
-bx X2
+b1010 Y2
+b100 X2
 bx W2
 bx V2
-bx U2
-bx T2
-bx S2
-bx R2
-bx Q2
-bx P2
-bx O2
-bx N2
+b11 U2
+b1010 T2
+b100 S2
+b0 R2
+b1111 Q2
+b110000111100000000000000000000000000000000000000000000000000000000000000000100 P2
+b0 O2
+b11 N2
 b0 M2
 b0 L2
 b0 K2
@@ -6814,15 +6815,15 @@ b0 h
 b0 g
 b0 f
 b0 e
-bx d
+b100 d
 b0 c
 b0 b
 b0 a
-bx `
-bx _
+b11 `
+b0 _
 0^
 b0 ]
-bx \
+b100 \
 1[
 bx Z
 bx Y
@@ -6831,69 +6832,1584 @@ bx W
 bx V
 bx U
 bx T
-b0 S
-b0 R
-b0 Q
-b0 P
-b0 O
-b0 N
-b0 M
-b0 L
-b0 K
-b0 J
-b0 I
-b0 H
-b0 G
-b0 F
+bx S
+bx R
+bx Q
+bx P
+bx O
+bx N
+bx M
+bx L
+bx K
+bx J
+bx I
+bx H
+b11 G
+b1111 F
 b0 E
 b1 D
-b0 C
+1C
 b0 B
-b0 A
-b0 @
-b0 ?
+xA
+x@
+b11 ?
 b0 >
-b0 =
-b0 <
-b0 ;
-b0 :
-b0 9
+x=
+1<
+b1010 ;
+x:
+b1111 9
 b0 8
-b0 7
-b0 6
-b0 5
-04
-b0 3
-x2
-x1
-bx 0
+x7
+bx 6
+bx 5
+b100 4
+b100 3
+bx 2
+b1010 1
+x0
 bx /
-x.
-0-
+bx .
+bx -
 bx ,
-x+
+bx +
 bx *
 bx )
-x(
+bx (
 bx '
 bx &
 bx %
 bx $
 bx #
 bx "
-x!
+bx !
 $end
 #1
-0-
-bx 3
-bx M2
-bx [2
-14
+0C
 #2
-04
+b1010 3
+b1010 d
+b1010 X2
+b1010 f2
+b1010 p2
+b10100 ;
+b10100 `2
+b1010 4
+b1010 \
+b1010 S2
+b1010 ]2
+b11 8
+b11 E
+b11 R2
+b11 c2
+b10100 1
+b10100 T2
+b10100 Y2
+b10100 _2
+b110000111100110000000000000000000000000000000000000000000000000000000000001010 P2
+b0 D
+b1010 B
+b1010 M2
+b1010 [2
+1C
 #3
-14
+0C
 #4
-04
+x)-
+x1-
+x9-
+xA-
+xI-
+xQ-
+xY-
+xa-
+xi-
+xq-
+xy-
+x#.
+x+.
+x3.
+x;.
+xC.
+xK.
+xS.
+x[.
+xc.
+xk.
+xs.
+x{.
+x%/
+x-/
+x5/
+x=/
+xE/
+xM/
+xU/
+x]/
+xe/
+xm/
+xu/
+x}/
+x'0
+x/0
+x70
+x?0
+xG0
+xO0
+xW0
+x_0
+xg0
+xo0
+xw0
+x!1
+x)1
+x11
+x91
+xA1
+xI1
+xQ1
+xY1
+xa1
+xi1
+xq1
+xy1
+x#2
+x+2
+x32
+x;2
+xC2
+xm
+x'-
+x/-
+x7-
+x?-
+xG-
+xO-
+xW-
+x_-
+xg-
+xo-
+xw-
+x!.
+x).
+x1.
+x9.
+xA.
+xI.
+xQ.
+xY.
+xa.
+xi.
+xq.
+xy.
+x#/
+x+/
+x3/
+x;/
+xC/
+xK/
+xS/
+x[/
+xc/
+xk/
+xs/
+x{/
+x%0
+x-0
+x50
+x=0
+xE0
+xM0
+xU0
+x]0
+xe0
+xm0
+xu0
+x}0
+x'1
+x/1
+x71
+x?1
+xG1
+xO1
+xW1
+x_1
+xg1
+xo1
+xw1
+x!2
+x)2
+x12
+x92
+xA2
+x~,
+x(-
+x0-
+x8-
+x@-
+xH-
+xP-
+xX-
+x`-
+xh-
+xp-
+xx-
+x".
+x*.
+x2.
+x:.
+xB.
+xJ.
+xR.
+xZ.
+xb.
+xj.
+xr.
+xz.
+x$/
+x,/
+x4/
+x</
+xD/
+xL/
+xT/
+x\/
+xd/
+xl/
+xt/
+x|/
+x&0
+x.0
+x60
+x>0
+xF0
+xN0
+xV0
+x^0
+xf0
+xn0
+xv0
+x~0
+x(1
+x01
+x81
+x@1
+xH1
+xP1
+xX1
+x`1
+xh1
+xp1
+xx1
+x"2
+x*2
+x22
+x:2
+bx0 z,
+xB2
+xE'
+x"-
+x*-
+x_'
+x2-
+xg'
+x:-
+xo'
+xB-
+xw'
+xJ-
+x!(
+xR-
+x)(
+xZ-
+x1(
+xb-
+x9(
+xj-
+xA(
+xr-
+xI(
+xz-
+xQ(
+x$.
+xY(
+x,.
+xa(
+x4.
+xi(
+x<.
+xq(
+xD.
+xy(
+xL.
+x#)
+xT.
+x+)
+x\.
+x3)
+xd.
+x;)
+xl.
+xC)
+xt.
+xK)
+x|.
+xS)
+x&/
+x[)
+x./
+xc)
+x6/
+xk)
+x>/
+xs)
+xF/
+x{)
+xN/
+x%*
+xV/
+x-*
+x^/
+x5*
+xf/
+x=*
+xn/
+xE*
+xv/
+xM*
+x~/
+xU*
+x(0
+x]*
+x00
+xe*
+x80
+xm*
+x@0
+xu*
+xH0
+x}*
+xP0
+x'+
+xX0
+x/+
+x`0
+x7+
+xh0
+x?+
+xp0
+xG+
+xx0
+xO+
+x"1
+xW+
+x*1
+x_+
+x21
+xg+
+x:1
+xo+
+xB1
+xw+
+xJ1
+x!,
+xR1
+x),
+xZ1
+x1,
+xb1
+x9,
+xj1
+xA,
+xr1
+xI,
+xz1
+xQ,
+x$2
+xY,
+x,2
+xa,
+x42
+xi,
+x<2
+xq,
+xD2
+x|,
+xW'
+x&-
+xX'
+x.-
+x`'
+x6-
+xh'
+x>-
+xp'
+xF-
+xx'
+xN-
+x"(
+xV-
+x*(
+x^-
+x2(
+xf-
+x:(
+xn-
+xB(
+xv-
+xJ(
+x~-
+xR(
+x(.
+xZ(
+x0.
+xb(
+x8.
+xj(
+x@.
+xr(
+xH.
+xz(
+xP.
+x$)
+xX.
+x,)
+x`.
+x4)
+xh.
+x<)
+xp.
+xD)
+xx.
+xL)
+x"/
+xT)
+x*/
+x\)
+x2/
+xd)
+x:/
+xl)
+xB/
+xt)
+xJ/
+x|)
+xR/
+x&*
+xZ/
+x.*
+xb/
+x6*
+xj/
+x>*
+xr/
+xF*
+xz/
+xN*
+x$0
+xV*
+x,0
+x^*
+x40
+xf*
+x<0
+xn*
+xD0
+xv*
+xL0
+x~*
+xT0
+x(+
+x\0
+x0+
+xd0
+x8+
+xl0
+x@+
+xt0
+xH+
+x|0
+xP+
+x&1
+xX+
+x.1
+x`+
+x61
+xh+
+x>1
+xp+
+xF1
+xx+
+xN1
+x",
+xV1
+x*,
+x^1
+x2,
+xf1
+x:,
+xn1
+xB,
+xv1
+xJ,
+x~1
+xR,
+x(2
+xZ,
+x02
+xb,
+x82
+xj,
+x@2
+xr,
+x^
+xo
+xT'
+bx0 L'
+xP'
+x\'
+xY'
+xd'
+xa'
+xl'
+xi'
+xt'
+xq'
+x|'
+xy'
+x&(
+x#(
+x.(
+x+(
+x6(
+x3(
+x>(
+x;(
+xF(
+xC(
+xN(
+xK(
+xV(
+xS(
+x^(
+x[(
+xf(
+xc(
+xn(
+xk(
+xv(
+xs(
+x~(
+x{(
+x()
+x%)
+x0)
+x-)
+x8)
+x5)
+x@)
+x=)
+xH)
+xE)
+xP)
+xM)
+xX)
+xU)
+x`)
+x])
+xh)
+xe)
+xp)
+xm)
+xx)
+xu)
+x"*
+x})
+x**
+x'*
+x2*
+x/*
+x:*
+x7*
+xB*
+x?*
+xJ*
+xG*
+xR*
+xO*
+xZ*
+xW*
+xb*
+x_*
+xj*
+xg*
+xr*
+xo*
+xz*
+xw*
+x$+
+x!+
+x,+
+x)+
+x4+
+x1+
+x<+
+x9+
+xD+
+xA+
+xL+
+xI+
+xT+
+xQ+
+x\+
+xY+
+xd+
+xa+
+xl+
+xi+
+xt+
+xq+
+x|+
+xy+
+x&,
+x#,
+x.,
+x+,
+x6,
+x3,
+x>,
+x;,
+xF,
+xC,
+xN,
+xK,
+xV,
+xS,
+x^,
+x[,
+xf,
+xc,
+xn,
+xk,
+bx H'
+bx K'
+bx x,
+xv,
+xs,
+x$"
+x,"
+x4"
+x<"
+xD"
+xL"
+xT"
+x\"
+xd"
+xl"
+xt"
+x|"
+x&#
+x.#
+x6#
+x>#
+xF#
+xN#
+xV#
+x^#
+xf#
+xn#
+xv#
+x~#
+x($
+x0$
+x8$
+x@$
+xH$
+xP$
+xX$
+x`$
+xh$
+xp$
+xx$
+x"%
+x*%
+x2%
+x:%
+xB%
+xJ%
+xR%
+xZ%
+xb%
+xj%
+xr%
+xz%
+x$&
+x,&
+x4&
+x<&
+xD&
+xL&
+xT&
+x\&
+xd&
+xl&
+xt&
+x|&
+x&'
+x.'
+x6'
+x>'
+xn
+xS'
+xR'
+x['
+xc'
+xk'
+xs'
+x{'
+x%(
+x-(
+x5(
+x=(
+xE(
+xM(
+xU(
+x](
+xe(
+xm(
+xu(
+x}(
+x')
+x/)
+x7)
+x?)
+xG)
+xO)
+xW)
+x_)
+xg)
+xo)
+xw)
+x!*
+x)*
+x1*
+x9*
+xA*
+xI*
+xQ*
+xY*
+xa*
+xi*
+xq*
+xy*
+x#+
+x++
+x3+
+x;+
+xC+
+xK+
+xS+
+x[+
+xc+
+xk+
+xs+
+x{+
+x%,
+x-,
+x5,
+x=,
+xE,
+xM,
+xU,
+x],
+xe,
+xm,
+xu,
+x""
+x*"
+x2"
+x:"
+xB"
+xJ"
+xR"
+xZ"
+xb"
+xj"
+xr"
+xz"
+x$#
+x,#
+x4#
+x<#
+xD#
+xL#
+xT#
+x\#
+xd#
+xl#
+xt#
+x|#
+x&$
+x.$
+x6$
+x>$
+xF$
+xN$
+xV$
+x^$
+xf$
+xn$
+xv$
+x~$
+x(%
+x0%
+x8%
+x@%
+xH%
+xP%
+xX%
+x`%
+xh%
+xp%
+xx%
+x"&
+x*&
+x2&
+x:&
+xB&
+xJ&
+xR&
+xZ&
+xb&
+xj&
+xr&
+xz&
+x$'
+x,'
+x4'
+x<'
+x[
+xq
+bx ]
+bx h
+bx p
+xM'
+xU'
+x]'
+xe'
+xm'
+xu'
+x}'
+x'(
+x/(
+x7(
+x?(
+xG(
+xO(
+xW(
+x_(
+xg(
+xo(
+xw(
+x!)
+x))
+x1)
+x9)
+xA)
+xI)
+xQ)
+xY)
+xa)
+xi)
+xq)
+xy)
+x#*
+x+*
+x3*
+x;*
+xC*
+xK*
+xS*
+x[*
+xc*
+xk*
+xs*
+x{*
+x%+
+x-+
+x5+
+x=+
+xE+
+xM+
+xU+
+x]+
+xe+
+xm+
+xu+
+x}+
+x',
+x/,
+x7,
+x?,
+xG,
+xO,
+xW,
+x_,
+xg,
+xo,
+x}
+xy
+x'"
+x#"
+x/"
+x+"
+x7"
+x3"
+x?"
+x;"
+xG"
+xC"
+xO"
+xK"
+xW"
+xS"
+x_"
+x["
+xg"
+xc"
+xo"
+xk"
+xw"
+xs"
+x!#
+x{"
+x)#
+x%#
+x1#
+x-#
+x9#
+x5#
+xA#
+x=#
+xI#
+xE#
+xQ#
+xM#
+xY#
+xU#
+xa#
+x]#
+xi#
+xe#
+xq#
+xm#
+xy#
+xu#
+x#$
+x}#
+x+$
+x'$
+x3$
+x/$
+x;$
+x7$
+xC$
+x?$
+xK$
+xG$
+xS$
+xO$
+x[$
+xW$
+xc$
+x_$
+xk$
+xg$
+xs$
+xo$
+x{$
+xw$
+x%%
+x!%
+x-%
+x)%
+x5%
+x1%
+x=%
+x9%
+xE%
+xA%
+xM%
+xI%
+xU%
+xQ%
+x]%
+xY%
+xe%
+xa%
+xm%
+xi%
+xu%
+xq%
+x}%
+xy%
+x'&
+x#&
+x/&
+x+&
+x7&
+x3&
+x?&
+x;&
+xG&
+xC&
+xO&
+xK&
+xW&
+xS&
+x_&
+x[&
+xg&
+xc&
+xo&
+xk&
+xw&
+xs&
+x!'
+x{&
+x)'
+x%'
+x1'
+x-'
+x9'
+x5'
+bx l
+bx t
+xA'
+bx0 u
+x='
+x$-
+x,-
+x4-
+x<-
+xD-
+xL-
+xT-
+x\-
+xd-
+xl-
+xt-
+x|-
+x&.
+x..
+x6.
+x>.
+xF.
+xN.
+xV.
+x^.
+xf.
+xn.
+xv.
+x~.
+x(/
+x0/
+x8/
+x@/
+xH/
+xP/
+xX/
+x`/
+xh/
+xp/
+xx/
+x"0
+x*0
+x20
+x:0
+xB0
+xJ0
+xR0
+xZ0
+xb0
+xj0
+xr0
+xz0
+x$1
+x,1
+x41
+x<1
+xD1
+xL1
+xT1
+x\1
+xd1
+xl1
+xt1
+x|1
+x&2
+x.2
+x62
+x>2
+bx k
+bx F'
+bx y,
+xF2
+bx G'
+bx I'
+x|
+x{
+x&"
+x%"
+x."
+x-"
+x6"
+x5"
+x>"
+x="
+xF"
+xE"
+xN"
+xM"
+xV"
+xU"
+x^"
+x]"
+xf"
+xe"
+xn"
+xm"
+xv"
+xu"
+x~"
+x}"
+x(#
+x'#
+x0#
+x/#
+x8#
+x7#
+x@#
+x?#
+xH#
+xG#
+xP#
+xO#
+xX#
+xW#
+x`#
+x_#
+xh#
+xg#
+xp#
+xo#
+xx#
+xw#
+x"$
+x!$
+x*$
+x)$
+x2$
+x1$
+x:$
+x9$
+xB$
+xA$
+xJ$
+xI$
+xR$
+xQ$
+xZ$
+xY$
+xb$
+xa$
+xj$
+xi$
+xr$
+xq$
+xz$
+xy$
+x$%
+x#%
+x,%
+x+%
+x4%
+x3%
+x<%
+x;%
+xD%
+xC%
+xL%
+xK%
+xT%
+xS%
+x\%
+x[%
+xd%
+xc%
+xl%
+xk%
+xt%
+xs%
+x|%
+x{%
+x&&
+x%&
+x.&
+x-&
+x6&
+x5&
+x>&
+x=&
+xF&
+xE&
+xN&
+xM&
+xV&
+xU&
+x^&
+x]&
+xf&
+xe&
+xn&
+xm&
+xv&
+xu&
+x~&
+x}&
+x('
+x''
+x0'
+x/'
+x8'
+x7'
+x@'
+x?'
+x#-
+x+-
+x3-
+x;-
+xC-
+xK-
+xS-
+x[-
+xc-
+xk-
+xs-
+x{-
+x%.
+x-.
+x5.
+x=.
+xE.
+xM.
+xU.
+x].
+xe.
+xm.
+xu.
+x}.
+x'/
+x//
+x7/
+x?/
+xG/
+xO/
+xW/
+x_/
+xg/
+xo/
+xw/
+x!0
+x)0
+x10
+x90
+xA0
+xI0
+xQ0
+xY0
+xa0
+xi0
+xq0
+xy0
+x#1
+x+1
+x31
+x;1
+xC1
+xK1
+xS1
+x[1
+xc1
+xk1
+xs1
+x{1
+x%2
+x-2
+x52
+x=2
+xE2
+bx j
+bx I2
+bx i
+bx L2
+bx p2
+xw
+x!"
+x)"
+x1"
+x9"
+xA"
+xI"
+xQ"
+xY"
+xa"
+xi"
+xq"
+xy"
+x##
+x+#
+x3#
+x;#
+xC#
+xK#
+xS#
+x[#
+xc#
+xk#
+xs#
+x{#
+x%$
+x-$
+x5$
+x=$
+xE$
+xM$
+xU$
+x]$
+xe$
+xm$
+xu$
+x}$
+x'%
+x/%
+x7%
+x?%
+xG%
+xO%
+xW%
+x_%
+xg%
+xo%
+xw%
+x!&
+x)&
+x1&
+x9&
+xA&
+xI&
+xQ&
+xY&
+xa&
+xi&
+xq&
+xy&
+x#'
+x+'
+x3'
+x;'
+xv
+x~
+x("
+x0"
+x8"
+x@"
+xH"
+xP"
+xX"
+x`"
+xh"
+xp"
+xx"
+x"#
+x*#
+x2#
+x:#
+xB#
+xJ#
+xR#
+xZ#
+xb#
+xj#
+xr#
+xz#
+x$$
+x,$
+x4$
+x<$
+xD$
+xL$
+xT$
+x\$
+xd$
+xl$
+xt$
+x|$
+x&%
+x.%
+x6%
+x>%
+xF%
+xN%
+xV%
+x^%
+xf%
+xn%
+xv%
+x~%
+x(&
+x0&
+x8&
+x@&
+xH&
+xP&
+xX&
+x`&
+xh&
+xp&
+xx&
+x"'
+x*'
+x2'
+x:'
+x{,
+x%-
+x--
+x5-
+x=-
+xE-
+xM-
+xU-
+x]-
+xe-
+xm-
+xu-
+x}-
+x'.
+x/.
+x7.
+x?.
+xG.
+xO.
+xW.
+x_.
+xg.
+xo.
+xw.
+x!/
+x)/
+x1/
+x9/
+xA/
+xI/
+xQ/
+xY/
+xa/
+xi/
+xq/
+xy/
+x#0
+x+0
+x30
+x;0
+xC0
+xK0
+xS0
+x[0
+xc0
+xk0
+xs0
+x{0
+x%1
+x-1
+x51
+x=1
+xE1
+xM1
+xU1
+x]1
+xe1
+xm1
+xu1
+x}1
+x'2
+x/2
+x72
+x?2
+bx 3
+bx d
+bx X2
+bx f2
+bx b
+bx f
+bx s
+bx D'
+bx H2
+bx K2
+bx a
+bx e
+bx r
+bx B'
+bx w,
+bx G2
+bx J2
+b10110 ;
+b10110 `2
+b0 9
+b0 F
+b0 Q2
+b0 b2
+b10110 1
+b10110 T2
+b10110 Y2
+b10110 _2
+b110 ?
+b110 G
+b110 `
+b110 N2
+b110 U2
+b110 \2
+b110 a2
+b110000000000011xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx P2
+b10100 B
+b10100 M2
+b10100 [2
+1C
 #5
-14
+0C
+#6
+0<
+bx >
+bx _
+bx O2
+bx ?
+bx G
+bx `
+bx N2
+bx U2
+bx \2
+bx a2
+bx P2
+b10110 B
+b10110 M2
+b10110 [2
+1C
+#7
+0C
+#8
+b1 D
+1C
+#9
+0C
+#10
+1C
