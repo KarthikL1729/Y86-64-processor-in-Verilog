@@ -1,0 +1,209 @@
+VCD info: dumpfile processor.vcd opened for output.
+0:                    x
+1:                    x
+2:                    x
+3:                    x
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 00110000111100000000000000000000000000000000000000000000000000000000000000000100
+clk=1, icode= 3, ifun= 0, rA=15, rB= 0, valA=                   x, valB=                   x, valC=                   4, valE=                   4, valM=                   x, valP=                  10, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  0, wrtA=                   4, dstB = 15, wrtB =                    x
+clk=0, icode= 3, ifun= 0, rA=15, rB= 0, valA=                   x, valB=                   x, valC=                   4, valE=                   4, valM=                   x, valP=                  10, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  0, wrtA=                   4, dstB = 15, wrtB =                    x
+0:                    4
+1:                    x
+2:                    x
+3:                    x
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 00110000111100110000000000000000000000000000000000000000000000000000000000001010
+clk=1, icode= 3, ifun= 0, rA=15, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                  10, valM=                   x, valP=                  20, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  3, wrtA=                  10, dstB = 15, wrtB =                    x
+clk=0, icode= 3, ifun= 0, rA=15, rB= 3, valA=                   x, valB=                   x, valC=                  10, valE=                  10, valM=                   x, valP=                  20, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  3, wrtA=                  10, dstB = 15, wrtB =                    x
+0:                    4
+1:                    x
+2:                    x
+3:                   10
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 01100000000000110110000000000011010000000011000000000000000000000000000000000000
+clk=1, icode= 6, ifun= 0, rA= 0, rB= 3, valA=                   4, valB=                  10, valC=                  10, valE=                  14, valM=                   x, valP=                  22, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  3, wrtA=                  14, dstB = 15, wrtB =                    x
+clk=0, icode= 6, ifun= 0, rA= 0, rB= 3, valA=                   4, valB=                  10, valC=                  10, valE=                  14, valM=                   x, valP=                  22, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  3, wrtA=                  14, dstB = 15, wrtB =                    x
+0:                    4
+1:                    x
+2:                    x
+3:                   14
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 01100000000000110100000000110000000000000000000000000000000000000000000000000000
+clk=1, icode= 6, ifun= 0, rA= 0, rB= 3, valA=                   4, valB=                  14, valC=                  10, valE=                  18, valM=                   x, valP=                  24, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  3, wrtA=                  18, dstB = 15, wrtB =                    x
+clk=0, icode= 6, ifun= 0, rA= 0, rB= 3, valA=                   4, valB=                  14, valC=                  10, valE=                  18, valM=                   x, valP=                  24, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  3, wrtA=                  18, dstB = 15, wrtB =                    x
+0:                    4
+1:                    x
+2:                    x
+3:                   18
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 01000000001100000000000000000000000000000000000000000000000000000000000000000101
+clk=1, icode= 4, ifun= 0, rA= 3, rB= 0, valA=                  18, valB=                   4, valC=                   5, valE=                   9, valM=                   x, valP=                  34, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  3, wrtA=                  18, dstB = 15, wrtB =                    x
+clk=0, icode= 4, ifun= 0, rA= 3, rB= 0, valA=                  18, valB=                   4, valC=                   5, valE=                   9, valM=                   x, valP=                  34, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  3, wrtA=                  18, dstB = 15, wrtB =                    x
+0:                    4
+1:                    x
+2:                    x
+3:                   18
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 01010000001000000000000000000000000000000000000000000000000000000000000000000101
+clk=1, icode= 5, ifun= 0, rA= 2, rB= 0, valA=                  18, valB=                   4, valC=                   5, valE=                   9, valM=                  18, valP=                  44, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  2, wrtA=                  18, dstB = 15, wrtB =                    x
+clk=0, icode= 5, ifun= 0, rA= 2, rB= 0, valA=                  18, valB=                   4, valC=                   5, valE=                   9, valM=                  18, valP=                  44, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  2, wrtA=                  18, dstB = 15, wrtB =                    x
+0:                    4
+1:                    x
+2:                   18
+3:                   18
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 0110000000000010001000010010000001100000001000000010000100000000xxxxxxxxxxxxxxxx
+clk=1, icode= 6, ifun= 0, rA= 0, rB= 2, valA=                   4, valB=                  18, valC=                   5, valE=                  22, valM=                  18, valP=                  46, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  2, wrtA=                  22, dstB = 15, wrtB =                    x
+clk=0, icode= 6, ifun= 0, rA= 0, rB= 2, valA=                   4, valB=                  18, valC=                   5, valE=                  22, valM=                  18, valP=                  46, inst_valid=1, imem_er=x, hlt_er=x, cnd=x, dstA =  2, wrtA=                  22, dstB = 15, wrtB =                    x
+0:                    4
+1:                    x
+2:                   22
+3:                   18
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 001000010010000001100000001000000010000100000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+clk=1, icode= 2, ifun= 1, rA= 2, rB= 0, valA=                  22, valB=                   0, valC=                   5, valE=                  22, valM=                  18, valP=                  48, inst_valid=1, imem_er=x, hlt_er=x, cnd=1, dstA =  0, wrtA=                  22, dstB = 15, wrtB =                    x
+clk=0, icode= 2, ifun= 1, rA= 2, rB= 0, valA=                  22, valB=                   0, valC=                   5, valE=                  22, valM=                  18, valP=                  48, inst_valid=1, imem_er=x, hlt_er=x, cnd=1, dstA =  0, wrtA=                  22, dstB = 15, wrtB =                    x
+0:                   22
+1:                    x
+2:                   22
+3:                   18
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 01100000001000000010000100000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+clk=1, icode= 6, ifun= 0, rA= 2, rB= 0, valA=                  22, valB=                  22, valC=                   5, valE=                  44, valM=                  18, valP=                  50, inst_valid=1, imem_er=x, hlt_er=x, cnd=1, dstA =  0, wrtA=                  44, dstB = 15, wrtB =                    x
+clk=0, icode= 6, ifun= 0, rA= 2, rB= 0, valA=                  22, valB=                  22, valC=                   5, valE=                  44, valM=                  18, valP=                  50, inst_valid=1, imem_er=x, hlt_er=x, cnd=1, dstA =  0, wrtA=                  44, dstB = 15, wrtB =                    x
+0:                   44
+1:                    x
+2:                   22
+3:                   18
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = 0010000100000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+clk=1, icode= 2, ifun= 1, rA= 0, rB= 0, valA=                  44, valB=                   0, valC=                   5, valE=                  44, valM=                  18, valP=                  52, inst_valid=1, imem_er=x, hlt_er=x, cnd=1, dstA =  0, wrtA=                  44, dstB = 15, wrtB =                    x
+clk=0, icode= 2, ifun= 1, rA= 0, rB= 0, valA=                  44, valB=                   0, valC=                   5, valE=                  44, valM=                  18, valP=                  52, inst_valid=1, imem_er=x, hlt_er=x, cnd=1, dstA =  0, wrtA=                  44, dstB = 15, wrtB =                    x
+0:                   44
+1:                    x
+2:                   22
+3:                   18
+4:                    x
+5:                    x
+6:                    x
+7:                    x
+8:                    x
+9:                    x
+10:                    x
+11:                    x
+12:                    x
+13:                    x
+14:                    x
+
+Bits fetched = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+clk=1, icode= x, ifun= x, rA= 0, rB= 0, valA=                  44, valB=                   0, valC=                   5, valE=                  44, valM=                  18, valP=                  52, inst_valid=0, imem_er=x, hlt_er=x, cnd=1, dstA =  0, wrtA=                  44, dstB = 15, wrtB =                    x
