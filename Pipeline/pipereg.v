@@ -1,12 +1,16 @@
 module pipereg(F, D, E, M, W);
     
-
-
-    reg [63:0] F;                     // Only predPC
-    reg [146:0] D;                    // stat, icode, ifun, rA, rB, valC, valP
+    reg [217:0] F;                     // Only predPC
+    reg [217:0] D;                    // stat, icode, ifun, rA, rB, valC, valP
     reg [217:0] E;                    // stat, icode, ifun, valC, valA, valB, dstE, dstM, srcA, srcB
-    reg [142:0] M;                    // stat, icode, Cnd, valE, valA, dstE, dstM
-    reg [143:0] W;                    // stat, icode, valE, valA, dstE, dstM
+    reg [217:0] M;                    // stat, icode, Cnd, valE, valA, dstE, dstM
+    reg [217:0] W;                    // stat, icode, valE, valA, dstE, dstM
+
+    //reg [63:0] F;                     // Only predPC
+    //reg [146:0] D;                    // stat, icode, ifun, rA, rB, valC, valP
+    //reg [217:0] E;                    // stat, icode, ifun, valC, valA, valB, dstE, dstM, srcA, srcB
+    //reg [142:0] M;                    // stat, icode, Cnd, valE, valA, dstE, dstM
+    //reg [143:0] W;                    // stat, icode, valE, valA, dstE, dstM
     
     input F_predPC;
     output f_predPC;
@@ -54,7 +58,7 @@ module pipereg(F, D, E, M, W);
 
     // Should probably use a register array to be able to index into whatever we need, in which case we need
     //to designate certain specific blocks of the register to certain inputs and leave the rest unused.
-
+    //ALL EXECUTION IN THE STAGE NEEDS TO BE DONE ONE THE INPUT WITH CAPITAL LETTER BEFORE THE SUBSCRIPT. I guess. Or else it might not make sense.
     //assign reg0 = regArr[0];
     //assign reg3 = regArr[3];
 endmodule
