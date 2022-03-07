@@ -1,26 +1,26 @@
-module rexecute(clk, E_stat, E_icode, E_ifun, E_valC, E_valA, E_valB, E_dstE, E_dstM, E_srcA, E_srcB, e_stat, e_icode, e_ifun, e_valC, e_valA, e_valB, e_dstE, e_dstM, e_srcA, e_srcB);
+module rexecute(clk, d_stat, d_icode, d_ifun, d_valC, d_valA, d_valB, d_dstE, d_dstM, d_srcA, d_srcB, E_stat, E_icode, E_ifun, E_valC, E_valA, E_valB, E_dstE, E_dstM, E_srcA, E_srcB);
     
     input clk;
-    input [1:0] E_stat;
-    input [3:0] E_icode, E_ifun;
-    input [63:0] E_valC, E_valA, E_valB;
-    input [3:0] E_dstE, E_dstM, E_srcA, E_srcB;
-    output [1:0] e_stat;
-    output [3:0] e_icode, e_ifun;
-    output [63:0] e_valC, e_valA, e_valB;    
-    output [3:0] e_dstE, e_dstM, e_srcA, e_srcB;
+    input [1:0] d_stat;
+    input [3:0] d_icode, d_ifun;
+    input [63:0] d_valC, d_valA, d_valB;
+    input [3:0] d_dstE, d_dstM, d_srcA, d_srcB;
+    output [1:0] E_stat;
+    output [3:0] E_icode, E_ifun;
+    output [63:0] E_valC, E_valA, E_valB;    
+    output [3:0] E_dstE, E_dstM, E_srcA, E_srcB;
 
     always @(posedge clk) begin
-        e_stat <= E_stat;
-        e_icode <= E_icode;
-        e_ifun <= E_ifun;
-        e_valA <= E_valA;
-        e_valB <= E_valB;
-        e_valC <= E_valC;
-        e_dstE <= E_dstE;
-        e_dstM <= E_dstM;
-        e_srcA <= E_srcA;
-        e_srcB <= E_srcB;
+        E_stat <= d_stat;
+        E_icode <= d_icode;
+        E_ifun <= d_ifun;
+        E_valA <= d_valA;
+        E_valB <= d_valB;
+        E_valC <= d_valC;
+        E_dstE <= d_dstE;
+        E_dstM <= d_dstM;
+        E_srcA <= d_srcA;
+        E_srcB <= d_srcB;
     end
 
 endmodule
