@@ -1,16 +1,17 @@
-module fetch(f_stat, PC, f_icode, f_ifun, f_rA, rB, valC, valP, inst_valid, imem_er, hlt_er);
+module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, valC, valP, inst_valid, imem_er, hlt_er);
 
   input [63:0] PC;
-  output reg [2:0] f_stat;
+  output reg [3:0] f_stat;
   output reg [3:0] f_icode;
   output reg [3:0] f_ifun;
   output reg [3:0] f_rA;
-  output reg [3:0] rB; 
+  output reg [3:0] f_rB; 
   output reg [63:0] valC;
   output reg [63:0] valP;
   output reg inst_valid;         //f_status condition for instruction invalidity
   output reg imem_er;            //f_status condition for invalid address
   output reg hlt_er;             //f_status condition for halt
+  output reg dmem_er;            //f_status condition for data memory error 
   reg [7:0] insmem[2047:0];      //2kB of instruction memory cause why not
   reg [0:79] inst;               //10 byte max length for instruction
 
@@ -85,6 +86,7 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, rB, valC, valP, inst_valid, imem
       if(PC > 2047) begin
         imem_er = 1;               //Invalid address, out of scope
       end
+        dmem_er = 0;               //Data memory error, initialised to zero
 
       inst = {insmem[PC], insmem[PC + 1], insmem[PC + 2], insmem[PC + 3], insmem[PC + 4], insmem[PC + 5], insmem[PC + 6], insmem[PC + 7], insmem[PC + 8], insmem[PC + 9]};   //Fetching 10 bytes
       
@@ -103,19 +105,19 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, rB, valC, valP, inst_valid, imem
       else if (f_icode == 2) begin  //cmovxx instruction encountered
         valP = PC + 2; 
         f_rA = inst[8:11];
-        rB = inst[12:15];         //Register specifiers
+        f_rB = inst[12:15];         //Register specifiers
       end     
       else if (f_icode == 3 || f_icode == 4 || f_icode == 5) begin  
                                   //irmovq/rmmovq/mrmovq instruction encountered
         valP = PC + 10;
         f_rA = inst[8:11];
-        rB = inst[12:15];         //Register specifiers
+        f_rB = inst[12:15];         //Register specifiers
         valC = inst[16:79];       //Constant value
       end
       else if (f_icode == 6) begin  //OPq instruction encountered
         valP = PC + 2;
         f_rA = inst[8:11];
-        rB = inst[12:15];         //Register specifiers
+        f_rB = inst[12:15];         //Register specifiers
       end
       else if (f_icode == 7 || f_icode == 8) begin  
                                   //jxx/call instruction encountered
@@ -129,7 +131,7 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, rB, valC, valP, inst_valid, imem
                                   //pushq/popq instruction encountered
         valP = PC + 2;
         f_rA = inst[8:11];
-        rB = inst[12:15];
+        f_rB = inst[12:15];
       end
       else begin
         inst_valid = 0;               //Invalid f_icode, hence invalid instruction
@@ -141,20 +143,23 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, rB, valC, valP, inst_valid, imem
       //$display("Hibro");
       if (inst_valid) begin
           f_stat[1] = ~inst_valid;
+          f_stat[3] = 0;
           f_stat[2] = 0;
           f_stat[0] = 0;
       end
       else if(hlt_er) begin
           f_stat[2] = hlt_er;
+          f_stat[3] = 0;         
           f_stat[1] = 0;
           f_stat[0] = 0;
       end
       else begin
           f_stat[0] = 1;
+          f_stat[3] = 0;
           f_stat[1] = 0;
           f_stat[2] = 0;
       end
-      if (f_stat[1] == 1 || f_stat[2] == 1) begin
+      if (f_stat[1] == 1 || f_stat[2] == 1 || f_stat[3] == 1) begin
           $finish;                                                //Instruction invalid error or halt encountered, stop everything.
       end
   end

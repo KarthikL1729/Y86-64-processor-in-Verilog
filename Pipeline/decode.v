@@ -3,12 +3,12 @@
 
 module decode(D_stat, D_icode, D_ifun, rA, rB, valC, valP, e_dstE, e_valE, M_dstE, M_valE, M_dstM, m_valM, W_dstM, W_valM, W_dstE, W_valE, d_stat, d_icode, d_ifun, d_valC, d_valA, d_valB, d_dstE, d_dstM, d_srcA, d_srcB);
 
-    input [2:0] D_stat;
+    input [3:0] D_stat;
     input [3:0] D_icode, D_ifun;
     input [3:0] rA, rB, e_dstE, M_dstE, M_dstM, W_dstM, W_dstE;  
     input [63:0] valC, valP, e_valE, M_valE, m_valM, W_valM, W_valE;                         
     //8 byte values in the registers, stk is (%rsp)
-    output reg [2:0] d_stat, d_icode, d_ifun;
+    output reg [3:0] d_stat, d_icode, d_ifun;
     output reg [63:0] d_valC, d_valA, d_valB;
     output reg [3:0] d_dstE, d_dstM, d_srcA, d_srcB;                          // regArr[14] is stack pointer  
 

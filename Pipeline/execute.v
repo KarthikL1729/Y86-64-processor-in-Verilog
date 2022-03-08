@@ -2,13 +2,13 @@
 
 module execute(E_stat, E_icode, E_ifun, E_valA, E_valB, E_valC, E_dstE, E_dstM, e_icode, e_valE, e_stat, e_dstE, e_dstM, e_valA, zf, of, sf, e_cnd, W_stat, m_stat);
 
-    input [2:0] E_stat, W_stat, m_stat;
+    input [3:0] E_stat, W_stat, m_stat;
     input [3:0] E_icode, E_ifun, E_dstE, E_dstM;
     input [63:0] E_valA, E_valB, E_valC;
     output reg [3:0] e_icode;
     output reg [63:0] e_valE, e_valA;
     output reg e_cnd, zf, of, sf;                                     // e_cnd is conditional move/jump flag
-    output reg [2:0] e_stat;
+    output reg [3:0] e_stat;
 
     reg signed [63:0] a, b;
     reg [1:0] opcode;
@@ -23,8 +23,8 @@ module execute(E_stat, E_icode, E_ifun, E_valA, E_valB, E_valC, E_dstE, E_dstM, 
         b = 0;
     end
 
-    always @(E_stat, E_icode, E_ifun, E_valA, E_valB, E_valC, E_dstE, E_dstM, W_stat, m_stat, e_cnd) begin                                           // Setting condition flags
-        if(E_icode == 6 && W_stat[1] == 0 && m_stat[1] == 0 && W_stat[2] == 0 && m_stat[2] == 0) begin      // Set CC with forwarding
+    always @(E_stat, E_icode, E_ifun, E_valA, E_valB, E_valC, E_dstE, E_dstM, e_cnd) begin                                           // Setting condition flags
+        if(E_icode == 6 && W_stat[1] == 0 && m_stat[1] == 0 && W_stat[2] == 0 && m_stat[2] == 0 && W_stat[3] == 0 && m_stat[3] == 0) begin      // Set CC with forwarding
             if(zero == 0) begin                                 // Zero flag
                 zf = 1;
             end

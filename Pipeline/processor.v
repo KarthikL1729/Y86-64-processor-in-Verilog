@@ -3,15 +3,20 @@
 `include "execute.v"
 `include "memory.v"
 `include "write_back.v"
-`include "pc_update.v"
 `include "regarr.v"
+`include "pc_predict.v"
+`include "rfetch.v"
+`include "rdecode.v"
+`include "rexecute.v"
+`include "rmem.v"
+`include "rwback.v"
 
 module processor;
 
     reg clk;
-    reg [2:0] stat;                                             // AOK, Halt, Inst error
+    reg [3:0] stat;                                             // AOK, Halt, Inst error
     reg [63:0] PC;
-    wire [63:0] valA, valB, valC, valE, valP, valM, newPC, stkpt, dataA, dataB, valAout, valBout, valAin, valBin;// reg0, reg3;
+    wire [63:0] valA, valB, valC, valE, valP, valM, newPC, stkpt, dataA, dataB, valAout, valBout, valAin, valBin;
     wire cnd, inst_valid, imem_er, hlt_er, zf, sf, of;
     wire [3:0] icode, ifun, rA, rB, dstA, dstB;
     wire [63:0] datamem[2047:0];
@@ -32,15 +37,18 @@ module processor;
 
     end
 
-    fetch fetch1(.PC(PC), .icode(icode), .ifun(ifun), .rA(rA), .rB(rB), .valC(valC), .valP(valP), .inst_valid(inst_valid), .imem_er(imem_er), .hlt_er(hlt_er));
-    regarr regArr(.PC(PC), .rA(rA), .rB(rB), .valA(valA), .valB(valB), .valStk(stkpt), .dstA(dstA), .dstB(dstB), .wrtA(dataA), .wrtB(dataB));
-    decode decode1(icode(icode), .valAin(valA), .valBin(valB), .stkPt(stkpt), .valAout(valAout), .valBout(valBout));
-    execute execute1(.icode(icode), .ifun(ifun), .valA(valAout), .valB(valBout), .valC(valC), .valE(valE), .zf(zf), .of(of), .sf(sf), .cnd(cnd));
-    memory memory1(.clk(clk), .icode(icode), .valP(valP), .valA(valAout), .valB(valBout), .valE(valE), .valM(valM));
-    write_back write_back1(.clk(clk), .cnd(cnd), .icode(icode), .rA(rA), .rB(rB), .valM(valM), .valE(valE), .dstA(dstA), .dstB(dstB), .dataA(dataA), .dataB(dataB));
-    pc_update pc_update1(.clk(clk), .icode(icode), .PC(PC), .valP(valP), .valM(valM), .valC(valC), .cnd(cnd), .newPC(newPC));
-
-
+    fetch fetch1(.f_stat(), .PC(), .f_icode(), .f_ifun(), .f_rA(), .f_rB(), .valC(), .valP(), .inst_valid(), .imem_er(), .hlt_er());
+    rfetch rfetch1(.clk(), .predPC(), .F_predPC());
+    decode decode1(.D_stat(), .D_icode(), .D_ifun(), .rA(), .rB(), .valC(), .valP(), .e_dstE(), .e_valE(), .M_dstE(), .M_valE(), .M_dstM(), .m_valM(), .W_dstM(), .W_valM(), .W_dstE(), .W_valE(), .d_stat(), .d_icode(), .d_ifun(), .d_valC(), .d_valA(), .d_valB(), .d_dstE(), .d_dstM(), .d_srcA(), .d_srcB());
+    rdecode rdecode1(.clk(), .f_stat(), .f_icode(), .f_ifun(), .f_rA(), .f_rB(), .f_valC(), .f_valP(), .D_stat(), .D_icode(), .D_ifun(), .D_rA(), .D_rB(), .D_valC(), .D_valP());
+    execute execute1(.E_stat(), .E_icode(), .E_ifun(), .E_valA(), .E_valB(), .E_valC(), .E_dstE(), .E_dstM(), .e_icode(), .e_valE(), .e_stat(), .e_dstE(), .e_dstM(), .e_valA(), .zf(), .of(), .sf(), .e_cnd(), .W_stat(), .m_stat());
+    rexecute rexecute1(.clk(), .d_stat(), .d_icode(), .d_ifun(), .d_valC(), .d_valA(), .d_valB(), .d_dstE(), .d_dstM(), .d_srcA(), .d_srcB(), .E_stat(), .E_icode(), .E_ifun(), .E_valC(), .E_valA(), .E_valB(), .E_dstE(), .E_dstM(), .E_srcA(), .E_srcB());
+    memory memory1(.M_stat(), .M_icode(), .M_cnd(), .M_valE(), .M_valA(), .M_dstE(), .M_dstM(), .m_stat(), .m_icode(), .m_valE(), .m_valM(), .m_dstE(), .m_dstM(), .M_cndfwd(), .M_valAfwd(), .M_valEfwd());
+    rmem rmem1(.clk(), .e_stat(), .e_icode(), .e_cnd(), .e_valE,() .e_valA(), .e_dstE(), .e_dstM(), .M_stat(), .M_icode(), .M_cnd(), .M_valE(), .M_valA(), .M_dstE(), .M_dstM());
+    write_back write_back1(.W_stat(), .W_icode(), .W_valE(), .W_valM(), .W_dstE(), .W_dstM(), .w_stat(), .w_icode(), .w_valE(), .w_valM(), .w_dstE(), .w_dstM());
+    rwback rwback1(.clk(), .W_stat(), .W_icode(), .W_valE(), .W_valA(), .W_dstE(), .W_dstM(), .m_stat(), .m_icode(), .m_valE(), .m_valA(), .m_dstE(), .m_dstM());
+    pc_predict pc_predict1(.icode(), .PC(), .valP(), .valM(), .valC(), .predPC());  
+            
     always #1 clk=~clk;
 
     always @(*) begin
