@@ -40,31 +40,6 @@ module processor;
     write_back write_back1(.clk(clk), .cnd(cnd), .icode(icode), .rA(rA), .rB(rB), .valM(valM), .valE(valE), .dstA(dstA), .dstB(dstB), .dataA(dataA), .dataB(dataB));
     pc_update pc_update1(.clk(clk), .icode(icode), .PC(PC), .valP(valP), .valM(valM), .valC(valC), .cnd(cnd), .newPC(newPC));
 
-    always @(posedge clk) begin
-        
-        //$display("Hibro");
-        PC = newPC;
-
-        if (inst_valid) begin
-            stat[1] = ~inst_valid;
-            stat[2] = 0;
-            stat[0] = 0;
-        end
-        else if(hlt_er) begin
-            stat[2] = hlt_er;
-            stat[1] = 0;
-            stat[0] = 0;
-        end
-        else begin
-            stat[0] = 1;
-            stat[1] = 0;
-            stat[2] = 0;
-        end
-
-        if (stat[1] == 1 || stat[2] == 1) begin
-            $finish;                                                //Instruction invalid error or halt encountered, stop everything.
-        end
-    end
 
     always #1 clk=~clk;
 

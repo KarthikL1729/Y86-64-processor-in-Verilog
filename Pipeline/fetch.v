@@ -1,16 +1,17 @@
-module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_er);
+module fetch(clk, f_stat, PC, f_icode, f_ifun, f_rA, rB, valC, valP, inst_valid, imem_er, hlt_er);
 
   input clk;                    
   input [63:0] PC;
-  output reg [3:0] icode;
-  output reg [3:0] ifun;
-  output reg [3:0] rA;
+  output reg [2:0] f_stat;
+  output reg [3:0] f_icode;
+  output reg [3:0] f_ifun;
+  output reg [3:0] f_rA;
   output reg [3:0] rB; 
   output reg [63:0] valC;
   output reg [63:0] valP;
-  output reg inst_valid;         //Status condition for instruction invalidity
-  output reg imem_er;            //Status condition for invalid address
-  output reg hlt_er;             //Status condition for halt
+  output reg inst_valid;         //f_status condition for instruction invalidity
+  output reg imem_er;            //f_status condition for invalid address
+  output reg hlt_er;             //f_status condition for halt
   reg [7:0] insmem[2047:0];      //2kB of instruction memory cause why not
   reg [0:79] inst;               //10 byte max length for instruction
 
@@ -88,51 +89,74 @@ module fetch(clk, PC, icode, ifun, rA, rB, valC, valP, inst_valid, imem_er, hlt_
 
       inst = {insmem[PC], insmem[PC + 1], insmem[PC + 2], insmem[PC + 3], insmem[PC + 4], insmem[PC + 5], insmem[PC + 6], insmem[PC + 7], insmem[PC + 8], insmem[PC + 9]};   //Fetching 10 bytes
       
-      icode = inst[0:3];          //Instruction specifier
-      ifun = inst[4:7];           //Function specifier for xx instructions
+      f_icode = inst[0:3];          //Instruction specifier
+      f_ifun = inst[4:7];           //Function specifier for xx instructions
       
       inst_valid = 1;                 //Assume instruction is valid, default case will invalidate
       
-      if(icode == 0) begin        //halt instruction encountered
+      if(f_icode == 0) begin        //halt instruction encountered
         hlt_er = 1;
         valP = PC + 1;
       end          
-      else if (icode == 1) begin  //nop instruction encountered
+      else if (f_icode == 1) begin  //nop instruction encountered
         valP = PC + 1;
       end
-      else if (icode == 2) begin  //cmovxx instruction encountered
+      else if (f_icode == 2) begin  //cmovxx instruction encountered
         valP = PC + 2; 
-        rA = inst[8:11];
+        f_rA = inst[8:11];
         rB = inst[12:15];         //Register specifiers
       end     
-      else if (icode == 3 || icode == 4 || icode == 5) begin  
+      else if (f_icode == 3 || f_icode == 4 || f_icode == 5) begin  
                                   //irmovq/rmmovq/mrmovq instruction encountered
         valP = PC + 10;
-        rA = inst[8:11];
+        f_rA = inst[8:11];
         rB = inst[12:15];         //Register specifiers
         valC = inst[16:79];       //Constant value
       end
-      else if (icode == 6) begin  //OPq instruction encountered
+      else if (f_icode == 6) begin  //OPq instruction encountered
         valP = PC + 2;
-        rA = inst[8:11];
+        f_rA = inst[8:11];
         rB = inst[12:15];         //Register specifiers
       end
-      else if (icode == 7 || icode == 8) begin  
+      else if (f_icode == 7 || f_icode == 8) begin  
                                   //jxx/call instruction encountered
         valP = PC + 9;
         valC = inst[8:71];
       end
-      else if (icode == 9) begin  //ret instruction encountered
+      else if (f_icode == 9) begin  //ret instruction encountered
         valP = PC + 1;
       end
-      else if (icode == 10 || icode == 11) begin 
+      else if (f_icode == 10 || f_icode == 11) begin 
                                   //pushq/popq instruction encountered
         valP = PC + 2;
-        rA = inst[8:11];
+        f_rA = inst[8:11];
         rB = inst[12:15];
       end
       else begin
-        inst_valid = 0;               //Invalid icode, hence invalid instruction
+        inst_valid = 0;               //Invalid f_icode, hence invalid instruction
+      end
+  end
+
+  always @(posedge clk) begin
+      
+      //$display("Hibro");
+      if (inst_valid) begin
+          f_stat[1] = ~inst_valid;
+          f_stat[2] = 0;
+          f_stat[0] = 0;
+      end
+      else if(hlt_er) begin
+          f_stat[2] = hlt_er;
+          f_stat[1] = 0;
+          f_stat[0] = 0;
+      end
+      else begin
+          f_stat[0] = 1;
+          f_stat[1] = 0;
+          f_stat[2] = 0;
+      end
+      if (f_stat[1] == 1 || f_stat[2] == 1) begin
+          $finish;                                                //Instruction invalid error or halt encountered, stop everything.
       end
   end
 

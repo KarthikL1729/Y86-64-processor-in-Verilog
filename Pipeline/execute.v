@@ -1,12 +1,12 @@
 `include "ALU/ALU_64.v"
 
-module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
+module execute(clk, E_icode, E_ifun, E_valA, E_valB, E_valC, e_valE, zf, of, sf, E_cnd);
 
     input clk;
-    input [3:0] icode, ifun;
-    input [63:0] valA, valB, valC;
-    output reg [63:0] valE;
-    output reg cnd, zf, of, sf;                                     // cnd is conditional move/jump flag
+    input [3:0] E_icode, E_ifun;
+    input [63:0] E_valA, E_valB, E_valC;
+    output reg [63:0] e_valE;
+    output reg E_cnd, zf, of, sf;                                     // E_cnd is conditional move/jump flag
 
     reg signed [63:0] a, b;
     reg [1:0] opcode;
@@ -22,7 +22,7 @@ module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
     end
 
     always @(*) begin                                           // Setting condition flags
-        if(icode == 6) begin
+        if(E_icode == 6) begin
             if(zero == 0) begin                                 // Zero flag
                 zf = 1;
             end
@@ -34,102 +34,102 @@ module execute(clk, icode, ifun, valA, valB, valC, valE, zf, of, sf, cnd);
             end
         end
         // Actual ALU part                                     // Execution
-            if (icode == 2) begin                               //cmovXX
+            if (E_icode == 2) begin                               //cmovXX
                 opcode = 2'b00;
-                a = valA;
+                a = E_valA;
                 b = 0;
-                valE = res;
-                if (ifun == 0) begin
-                    cnd = 1;
+                e_valE = res;
+                if (E_ifun == 0) begin
+                    E_cnd = 1;
                 end
-                else if (ifun == 1) begin
-                    cnd = (sf^of) | zf;
+                else if (E_ifun == 1) begin
+                    E_cnd = (sf^of) | zf;
                 end
-                else if (ifun == 2) begin
-                    cnd = sf^of;
+                else if (E_ifun == 2) begin
+                    E_cnd = sf^of;
                 end
-                else if (ifun == 3) begin
-                    cnd = zf;
+                else if (E_ifun == 3) begin
+                    E_cnd = zf;
                 end
-                else if (ifun == 4) begin
-                    cnd = ~zf;
+                else if (E_ifun == 4) begin
+                    E_cnd = ~zf;
                 end
-                else if (ifun == 5) begin
-                    cnd = ~(sf^of);
+                else if (E_ifun == 5) begin
+                    E_cnd = ~(sf^of);
                 end
-                else if (ifun == 6) begin
-                    cnd = ~(sf^of)&(~zf);
+                else if (E_ifun == 6) begin
+                    E_cnd = ~(sf^of)&(~zf);
                 end
             end
-            if (icode == 3) begin                               //irmovq
-                valE = valC;
+            if (E_icode == 3) begin                               //irmovq
+                e_valE = E_valC;
             end
 
-            if (icode == 4 || icode == 5) begin                 //rmmovq and mrmovq
+            if (E_icode == 4 || E_icode == 5) begin                 //rmmovq and mrmovq
                 opcode = 2'b00;
-                a = valC;
-                b = valB;
-                valE = res;
+                a = E_valC;
+                b = E_valB;
+                e_valE = res;
             end
 
-            if(icode == 6) begin                                // OPq
-                if (ifun == 0) begin                            // Add                          
+            if(E_icode == 6) begin                                // OPq
+                if (E_ifun == 0) begin                            // Add                          
                     opcode = 2'b00;
-                    a = valA;
-                    b = valB;
+                    a = E_valA;
+                    b = E_valB;
                 end
-                if (ifun == 1) begin                            // Sub
+                if (E_ifun == 1) begin                            // Sub
                     opcode = 2'b01;
-                    a = valA;
-                    b = valB;
+                    a = E_valA;
+                    b = E_valB;
                 end
-                if (ifun == 2) begin                            // And
+                if (E_ifun == 2) begin                            // And
                     opcode = 2'b10;
-                    a = valA;
-                    b = valB;
+                    a = E_valA;
+                    b = E_valB;
                 end
-                if (ifun == 3) begin                            // Xor
+                if (E_ifun == 3) begin                            // Xor
                     opcode = 2'b11;
-                    a = valA;
-                    b = valB;
+                    a = E_valA;
+                    b = E_valB;
                 end
-                valE = res;
+                e_valE = res;
             end
 
-            if (icode == 7) begin                               //jXX
-                if (ifun == 0) begin
-                    cnd = 1;
+            if (E_icode == 7) begin                               //jXX
+                if (E_ifun == 0) begin
+                    E_cnd = 1;
                 end
-                else if (ifun == 1) begin
-                    cnd = (sf^of) | zf;
+                else if (E_ifun == 1) begin
+                    E_cnd = (sf^of) | zf;
                 end
-                else if (ifun == 2) begin
-                    cnd = sf^of;
+                else if (E_ifun == 2) begin
+                    E_cnd = sf^of;
                 end
-                else if (ifun == 3) begin
-                    cnd = zf;
+                else if (E_ifun == 3) begin
+                    E_cnd = zf;
                 end
-                else if (ifun == 4) begin
-                    cnd = ~zf;
+                else if (E_ifun == 4) begin
+                    E_cnd = ~zf;
                 end
-                else if (ifun == 5) begin
-                    cnd = ~(sf^of);
+                else if (E_ifun == 5) begin
+                    E_cnd = ~(sf^of);
                 end
-                else if (ifun == 6) begin
-                    cnd = ~(sf^of)&(~zf);
+                else if (E_ifun == 6) begin
+                    E_cnd = ~(sf^of)&(~zf);
                 end
             end
-            if (icode == 8 || icode == 10) begin            //call and pushq
+            if (E_icode == 8 || E_icode == 10) begin            //call and pushq
                 opcode = 2'b01;
-                a = valB;
+                a = E_valB;
                 b = 8;
-                valE = res;
+                e_valE = res;
             end
-            if (icode == 9 || icode == 11) begin            //ret and popq
+            if (E_icode == 9 || E_icode == 11) begin            //ret and popq
                 opcode = 2'b00;
-                a = valB;
+                a = E_valB;
                 b = 8;
-                valE = res;
+                e_valE = res;
             end
     end
 

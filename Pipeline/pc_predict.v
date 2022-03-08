@@ -38,7 +38,7 @@ module pc_select(M_icode, M_Cnd, M_valA, W_icode, W_valM, F_predPC, f_PC);
         f_PC = W_valM;
     end
     else begin
-      f_PC = F_predPC;
+        f_PC = F_predPC;
     end
 
 endmodule
