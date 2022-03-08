@@ -6,11 +6,11 @@ module rmem(clk, e_stat, e_icode, e_cnd, e_valE, e_valA, e_dstE, e_dstM, M_stat,
     input e_cnd;
     input [63:0] e_valE, e_valA;
     input [3:0] e_dstE, e_dstM;
-    output [1:0] M_stat;
-    output [3:0] M_icode; 
-    output M_cnd; 
-    output [63:0] M_valE, M_valA;
-    output [3:0] M_dstE, M_dstM;
+    output reg [1:0] M_stat;
+    output reg [3:0] M_icode; 
+    output reg M_cnd; 
+    output reg [63:0] M_valE, M_valA;
+    output reg [3:0] M_dstE, M_dstM;
 
     always @(posedge clk) begin
         M_stat <= e_stat;
