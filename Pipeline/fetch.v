@@ -1,6 +1,5 @@
-module fetch(clk, f_stat, PC, f_icode, f_ifun, f_rA, rB, valC, valP, inst_valid, imem_er, hlt_er);
+module fetch(f_stat, PC, f_icode, f_ifun, f_rA, rB, valC, valP, inst_valid, imem_er, hlt_er);
 
-  input clk;                    
   input [63:0] PC;
   output reg [2:0] f_stat;
   output reg [3:0] f_icode;
@@ -81,7 +80,7 @@ module fetch(clk, f_stat, PC, f_icode, f_ifun, f_rA, rB, valC, valP, inst_valid,
       
   end
 
-  always @(*) begin
+  always @(PC) begin
 
       if(PC > 2047) begin
         imem_er = 1;               //Invalid address, out of scope

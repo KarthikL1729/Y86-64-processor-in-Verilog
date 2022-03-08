@@ -1,12 +1,14 @@
 `include "ALU/ALU_64.v"
 
-module execute(clk, E_icode, E_ifun, E_valA, E_valB, E_valC, e_valE, zf, of, sf, E_cnd);
+module execute(E_stat, E_icode, E_ifun, E_valA, E_valB, E_valC, E_dstE, E_dstM, e_icode, e_valE, e_stat, e_dstE, e_dstM, e_valA, zf, of, sf, e_cnd, W_stat, m_stat);
 
-    input clk;
-    input [3:0] E_icode, E_ifun;
+    input [2:0] E_stat, W_stat, m_stat;
+    input [3:0] E_icode, E_ifun, E_dstE, E_dstM;
     input [63:0] E_valA, E_valB, E_valC;
-    output reg [63:0] e_valE;
-    output reg E_cnd, zf, of, sf;                                     // E_cnd is conditional move/jump flag
+    output reg [3:0] e_icode;
+    output reg [63:0] e_valE, e_valA;
+    output reg e_cnd, zf, of, sf;                                     // e_cnd is conditional move/jump flag
+    output reg [2:0] e_stat;
 
     reg signed [63:0] a, b;
     reg [1:0] opcode;
@@ -21,8 +23,8 @@ module execute(clk, E_icode, E_ifun, E_valA, E_valB, E_valC, e_valE, zf, of, sf,
         b = 0;
     end
 
-    always @(*) begin                                           // Setting condition flags
-        if(E_icode == 6) begin
+    always @(E_stat, E_icode, E_ifun, E_valA, E_valB, E_valC, E_dstE, E_dstM, W_stat, m_stat, e_cnd) begin                                           // Setting condition flags
+        if(E_icode == 6 && W_stat[1] == 0 && m_stat[1] == 0 && W_stat[2] == 0 && m_stat[2] == 0) begin      // Set CC with forwarding
             if(zero == 0) begin                                 // Zero flag
                 zf = 1;
             end
@@ -40,25 +42,25 @@ module execute(clk, E_icode, E_ifun, E_valA, E_valB, E_valC, e_valE, zf, of, sf,
                 b = 0;
                 e_valE = res;
                 if (E_ifun == 0) begin
-                    E_cnd = 1;
+                    e_cnd = 1;
                 end
                 else if (E_ifun == 1) begin
-                    E_cnd = (sf^of) | zf;
+                    e_cnd = (sf^of) | zf;
                 end
                 else if (E_ifun == 2) begin
-                    E_cnd = sf^of;
+                    e_cnd = sf^of;
                 end
                 else if (E_ifun == 3) begin
-                    E_cnd = zf;
+                    e_cnd = zf;
                 end
                 else if (E_ifun == 4) begin
-                    E_cnd = ~zf;
+                    e_cnd = ~zf;
                 end
                 else if (E_ifun == 5) begin
-                    E_cnd = ~(sf^of);
+                    e_cnd = ~(sf^of);
                 end
                 else if (E_ifun == 6) begin
-                    E_cnd = ~(sf^of)&(~zf);
+                    e_cnd = ~(sf^of)&(~zf);
                 end
             end
             if (E_icode == 3) begin                               //irmovq
@@ -98,25 +100,25 @@ module execute(clk, E_icode, E_ifun, E_valA, E_valB, E_valC, e_valE, zf, of, sf,
 
             if (E_icode == 7) begin                               //jXX
                 if (E_ifun == 0) begin
-                    E_cnd = 1;
+                    e_cnd = 1;
                 end
                 else if (E_ifun == 1) begin
-                    E_cnd = (sf^of) | zf;
+                    e_cnd = (sf^of) | zf;
                 end
                 else if (E_ifun == 2) begin
-                    E_cnd = sf^of;
+                    e_cnd = sf^of;
                 end
                 else if (E_ifun == 3) begin
-                    E_cnd = zf;
+                    e_cnd = zf;
                 end
                 else if (E_ifun == 4) begin
-                    E_cnd = ~zf;
+                    e_cnd = ~zf;
                 end
                 else if (E_ifun == 5) begin
-                    E_cnd = ~(sf^of);
+                    e_cnd = ~(sf^of);
                 end
                 else if (E_ifun == 6) begin
-                    E_cnd = ~(sf^of)&(~zf);
+                    e_cnd = ~(sf^of)&(~zf);
                 end
             end
             if (E_icode == 8 || E_icode == 10) begin            //call and pushq
@@ -131,6 +133,15 @@ module execute(clk, E_icode, E_ifun, E_valA, E_valB, E_valC, e_valE, zf, of, sf,
                 b = 8;
                 e_valE = res;
             end
+
+        e_icode = E_icode;
+        e_stat = E_stat;
+        e_valA = E_valA;
+        e_dstM = E_dstM;
+ 
+        if (e_icode == 2 && e_cnd == 0) begin
+            e_dstE = 15;
+        end 
     end
 
 endmodule

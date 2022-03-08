@@ -32,10 +32,10 @@ module processor;
 
     end
 
-    fetch fetch1(.clk(clk), .PC(PC), .icode(icode), .ifun(ifun), .rA(rA), .rB(rB), .valC(valC), .valP(valP), .inst_valid(inst_valid), .imem_er(imem_er), .hlt_er(hlt_er));
+    fetch fetch1(.PC(PC), .icode(icode), .ifun(ifun), .rA(rA), .rB(rB), .valC(valC), .valP(valP), .inst_valid(inst_valid), .imem_er(imem_er), .hlt_er(hlt_er));
     regarr regArr(.PC(PC), .rA(rA), .rB(rB), .valA(valA), .valB(valB), .valStk(stkpt), .dstA(dstA), .dstB(dstB), .wrtA(dataA), .wrtB(dataB));
-    decode decode1(.clk(clk), .icode(icode), .valAin(valA), .valBin(valB), .stkPt(stkpt), .valAout(valAout), .valBout(valBout));
-    execute execute1(.clk(clk), .icode(icode), .ifun(ifun), .valA(valAout), .valB(valBout), .valC(valC), .valE(valE), .zf(zf), .of(of), .sf(sf), .cnd(cnd));
+    decode decode1(icode(icode), .valAin(valA), .valBin(valB), .stkPt(stkpt), .valAout(valAout), .valBout(valBout));
+    execute execute1(.icode(icode), .ifun(ifun), .valA(valAout), .valB(valBout), .valC(valC), .valE(valE), .zf(zf), .of(of), .sf(sf), .cnd(cnd));
     memory memory1(.clk(clk), .icode(icode), .valP(valP), .valA(valAout), .valB(valBout), .valE(valE), .valM(valM));
     write_back write_back1(.clk(clk), .cnd(cnd), .icode(icode), .rA(rA), .rB(rB), .valM(valM), .valE(valE), .dstA(dstA), .dstB(dstB), .dataA(dataA), .dataB(dataB));
     pc_update pc_update1(.clk(clk), .icode(icode), .PC(PC), .valP(valP), .valM(valM), .valC(valC), .cnd(cnd), .newPC(newPC));
