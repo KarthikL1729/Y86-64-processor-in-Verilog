@@ -1,12 +1,12 @@
 `include "regarr.v"
 
 
-module decode(D_stat, D_icode, D_ifun, rA, rB, valC, valP, e_dstE, e_valE, M_dstE, M_valE, M_dstM, m_valM, W_dstM, W_valM, W_dstE, W_valE, d_stat, d_icode, d_ifun, d_valC, d_valA, d_valB, d_dstE, d_dstM, d_srcA, d_srcB);
+module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M_dstE, M_valE, M_dstM, m_valM, W_dstM, W_valM, W_dstE, W_valE, d_stat, d_icode, d_ifun, d_valC, d_valA, d_valB, d_dstE, d_dstM, d_srcA, d_srcB);
 
     input [3:0] D_stat;
     input [3:0] D_icode, D_ifun;
     input [3:0] rA, rB, e_dstE, M_dstE, M_dstM, W_dstM, W_dstE;  
-    input [63:0] valC, valP, e_valE, M_valE, m_valM, W_valM, W_valE;                         
+    input [63:0] D_valC, D_valP, e_valE, M_valE, m_valM, W_valM, W_valE;                         
     //8 byte values in the registers, stk is (%rsp)
     output reg [3:0] d_stat, d_icode, d_ifun;
     output reg [63:0] d_valC, d_valA, d_valB;
@@ -16,12 +16,12 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, valC, valP, e_dstE, e_valE, M_dst
 
     regarr regfile(.srcA(d_srcA), .srcB(d_srcB), .valA(d_rvalA), .valB(d_rvalB), .valStk(valStk), .dstM(W_dstM), .dstE(W_dstE), .M(W_valM), .E(W_valE));
 
-    always @(D_icode, D_ifun, rA, rB, valC, valP) begin
+    always @(D_icode, D_ifun, rA, rB, D_valC, D_valP) begin
         
         d_stat = D_stat;
         d_icode = D_icode;
         d_ifun = D_ifun;
-        d_valC = valC;
+        d_valC = D_valC;
 
         case (icode)
             2: begin    //cmovxx
@@ -89,7 +89,7 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, valC, valP, e_dstE, e_valE, M_dst
         d_valA = d_rvalA;
 
         if(D_icode == 8 || D_icode == 7) begin
-            d_valA = valP;
+            d_valA = D_valP;
         end
         if(d_srcA == e_dstE) begin
             d_valA = e_valE;

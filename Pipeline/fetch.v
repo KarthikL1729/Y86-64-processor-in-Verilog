@@ -1,4 +1,4 @@
-module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, valC, valP, inst_valid, imem_er, hlt_er);
+module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid, imem_er, hlt_er);
 
   input [63:0] PC;
   output reg [3:0] f_stat;
@@ -6,8 +6,8 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, valC, valP, inst_valid, im
   output reg [3:0] f_ifun;
   output reg [3:0] f_rA;
   output reg [3:0] f_rB; 
-  output reg [63:0] valC;
-  output reg [63:0] valP;
+  output reg [63:0] f_valC;
+  output reg [63:0] f_valP;
   output reg inst_valid;         //f_status condition for instruction invalidity
   output reg imem_er;            //f_status condition for invalid address
   output reg hlt_er;             //f_status condition for halt
@@ -97,39 +97,39 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, valC, valP, inst_valid, im
       
       if(f_icode == 0) begin        //halt instruction encountered
         hlt_er = 1;
-        valP = PC + 1;
+        f_valP = PC + 1;
       end          
       else if (f_icode == 1) begin  //nop instruction encountered
-        valP = PC + 1;
+        f_valP = PC + 1;
       end
       else if (f_icode == 2) begin  //cmovxx instruction encountered
-        valP = PC + 2; 
+        f_valP = PC + 2; 
         f_rA = inst[8:11];
         f_rB = inst[12:15];         //Register specifiers
       end     
       else if (f_icode == 3 || f_icode == 4 || f_icode == 5) begin  
                                   //irmovq/rmmovq/mrmovq instruction encountered
-        valP = PC + 10;
+        f_valP = PC + 10;
         f_rA = inst[8:11];
         f_rB = inst[12:15];         //Register specifiers
-        valC = inst[16:79];       //Constant value
+        f_valC = inst[16:79];       //Constant value
       end
       else if (f_icode == 6) begin  //OPq instruction encountered
-        valP = PC + 2;
+        f_valP = PC + 2;
         f_rA = inst[8:11];
         f_rB = inst[12:15];         //Register specifiers
       end
       else if (f_icode == 7 || f_icode == 8) begin  
                                   //jxx/call instruction encountered
-        valP = PC + 9;
-        valC = inst[8:71];
+        f_valP = PC + 9;
+        f_valC = inst[8:71];
       end
       else if (f_icode == 9) begin  //ret instruction encountered
-        valP = PC + 1;
+        f_valP = PC + 1;
       end
       else if (f_icode == 10 || f_icode == 11) begin 
                                   //pushq/popq instruction encountered
-        valP = PC + 2;
+        f_valP = PC + 2;
         f_rA = inst[8:11];
         f_rB = inst[12:15];
       end
