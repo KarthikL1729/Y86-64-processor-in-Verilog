@@ -13,7 +13,7 @@ module memory(M_stat, M_icode, M_cnd, M_valE, M_valA, M_dstE, M_dstM, m_stat, m_
     reg [63:0] datamem [2047:0];                                               //Data memory 2048*8 bytes
 
     always @(M_stat, M_icode, M_cnd, M_valE, M_valA, M_dstE, M_dstM) begin
-        
+
         m_icode = M_icode;
         m_valE = M_valE;
         m_dstE = M_dstE;

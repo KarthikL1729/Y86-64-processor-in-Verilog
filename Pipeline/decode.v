@@ -16,7 +16,7 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
 
     regarr regfile(.srcA(d_srcA), .srcB(d_srcB), .valA(d_rvalA), .valB(d_rvalB), .valStk(valStk), .dstM(W_dstM), .dstE(W_dstE), .M(W_valM), .E(W_valE));
 
-    always @(D_icode, D_ifun, rA, rB, D_valC, D_valP) begin
+    always @(D_icode, D_ifun, rA, rB, D_valC, D_valP, d_rvalA, d_rvalB) begin
         
         d_stat = D_stat;
         d_icode = D_icode;

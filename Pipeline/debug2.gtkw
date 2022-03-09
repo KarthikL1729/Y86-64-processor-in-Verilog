@@ -1,0 +1,39 @@
+[*]
+[*] GTKWave Analyzer v3.3.111 (w)1999-2020 BSI
+[*] Wed Mar  9 18:41:29 2022
+[*]
+[dumpfile] "/home/sane/Y86-64-processor-in-Verilog/Pipeline/processor.vcd"
+[dumpfile_mtime] "Wed Mar  9 18:27:35 2022"
+[dumpfile_size] 137688
+[savefile] "/home/sane/Y86-64-processor-in-Verilog/Pipeline/debug2.gtkw"
+[timestart] 0
+[size] 1894 333
+[pos] -1 -1
+*-2.715439 16 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] processor.
+[sst_width] 211
+[signals_width] 274
+[sst_expanded] 1
+[sst_vpaned_height] 60
+@28
+processor.rexecute1.clk
+@22
+processor.fetch1.f_icode[3:0]
+processor.decode1.D_icode[3:0]
+processor.execute1.E_icode[3:0]
+processor.memory1.M_icode[3:0]
+processor.write_back1.W_icode[3:0]
+processor.execute1.E_valA[63:0]
+processor.execute1.E_valB[63:0]
+processor.rexecute1.E_icode[3:0]
+processor.rexecute1.E_valA[63:0]
+processor.rexecute1.E_valB[63:0]
+processor.rexecute1.d_valA[63:0]
+processor.rexecute1.d_valB[63:0]
+processor.decode1.d_valA[63:0]
+processor.decode1.d_valB[63:0]
+processor.decode1.d_rvalA[63:0]
+@23
+processor.decode1.d_rvalB[63:0]
+[pattern_trace] 1
+[pattern_trace] 0

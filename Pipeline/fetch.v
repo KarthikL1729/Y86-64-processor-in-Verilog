@@ -1,12 +1,13 @@
 //`include "pc_predict.v"
 `include "pc_select.v"
 
-module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid, imem_er, hlt_er, predPC, M_icode, W_icode, M_valA, W_valM, f_PC);
+module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid, imem_er, hlt_er, predPC, M_icode, W_icode, M_valA, W_valM);
 
   input [63:0] F_PC;
   input clk, M_cnd;
   input [3:0] M_icode, W_icode;
-  input [63:0] M_valA, W_valM, f_PC; 
+  input [63:0] M_valA, W_valM;
+  wire [63:0] f_PC; 
   output reg [3:0] f_stat;
   output reg [3:0] f_icode;
   output reg [3:0] f_ifun;
@@ -160,7 +161,7 @@ module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_val
   end
 
   always @(f_icode, f_valP, f_valC) begin
-      if (f_icode == 2 || f_icode == 3 || f_icode == 4 || f_icode == 5 || f_icode == 6 || f_icode == 10 || f_icode == 11) begin                                                                          //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
+      if (f_icode == 0 || f_icode == 1 || f_icode == 2 || f_icode == 3 || f_icode == 4 || f_icode == 5 || f_icode == 6 || f_icode == 10 || f_icode == 11) begin                                                                          //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
          predPC = f_valP;
       end
       else if (f_icode == 7) begin                                                   //jXX
@@ -201,7 +202,7 @@ module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_val
   end
 
   initial begin
-        if (f_icode == 2 || f_icode == 3 || f_icode == 4 || f_icode == 5 || f_icode == 6 || f_icode == 10 || f_icode == 11) begin                                                                          //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
+        if (f_icode == 0 || f_icode == 1 || f_icode == 2 || f_icode == 3 || f_icode == 4 || f_icode == 5 || f_icode == 6 || f_icode == 10 || f_icode == 11) begin                                                                          //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
             predPC = f_valP;
         end
         else if (f_icode == 7) begin                                                   //jXX
