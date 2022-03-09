@@ -12,7 +12,7 @@ author:
 
 Continuing from the mid-evals, we have now implemented a Y86 processor with pipelining support. Each stage has its own module, like they did in SEQ, and each intermediate pipeline register also have their own modules in separate files, named as `rxxx.v`. The final module `processor.v` is used for instantiating the various stages and registers, and to keep track of the outputs using `$monitor`. The centralised register bank module `regarr.v` is used here as well. 
 
-There is a separate module for PC selection called `pc_select.v`, and the PC prediction logic is included in the `fetch.v` file. All data forwarding is taken care of in the stages themselves, with appropriate inputs. The pipeline control logic also has its own module in `pipectrl.v` which decides whther a certain instruction needs to be stalled/bubbled or not depending on the conditions.
+There is a separate module for PC selection called `pc_select.v`, and the PC prediction logic is included in the `fetch.v` file. All data forwarding is taken care of in the stages themselves, with appropriate inputs. The pipeline control logic also has its own module in `pipectrl.v` which decides whther a certain instruction needs to be stalled/bubbled or not depending on the conditions. Data forwarding has been implemented in the `decode.v` file.
 
 The processor has 2kB of instruction memory, 14 registers and 2kB of data memory. Naming conventions for the variables are as is expected for a Y86 pipelined design.
 
@@ -39,9 +39,9 @@ The processor has 2kB of instruction memory, 14 registers and 2kB of data memory
 
 ## Stage 1: Fetch
 
-The fetch stage works on the instruction memory `insmem`, reading 10 bytes at a time. `icode` and `ifun` are split and aligned from the first byte, and valP is decided based on the value of icode. From the second byte of the  fetched instruction, the register operand specifiers are also obtained and stored. In the case where the instruction is 10 bytes long, the eight byte constant is stored in `valC`.
+The fetch stage works on the instruction memory `insmem`, reading 10 bytes at a time. `icode` and `ifun` are split and aligned from the first byte, and valP is decided based on the value of icode. From the second byte of the fetched instruction, the register operand specifiers are also obtained and stored. In the case where the instruction is 10 bytes long, the eight byte constant is stored in `valC`. 
 
-The fetch block now also includes PC prediction and status condition setting. The `pc_select` module is instantiated here, as we need it to update the PC, which requires the predicted PC from this stage.
+The fetch block now also includes PC prediction and status condition setting. The `pc_select` module is instantiated here, as we need it to update the PC, which requires the predicted PC from this stage. The PC is predicted according to the coniditions discussed in class.
 
 Thus, the inputs and outputs to this stage are as follows:
 
@@ -71,7 +71,7 @@ Thus, the inputs and outputs to this stage are as follows:
 - `inst`: register that is used to fetch 10 bytes from `insmem` at the location pointed to by PC
 - Forwarded values from future stages, which are used in PC preditcion and selection
 
-The instructions are hardcoded into the processor in this stage in an `initial` block for now. We aim to be able to read instructions from a file into `insmem`.
+The instructions are hardcoded into the processor in this stage in an `initial` block.
 
 \pagebreak
 
@@ -86,9 +86,18 @@ In this stage, the instruction is decoded from the `icode` value and the require
 - `D_ifun`
 - `rA`
 - `rB`
-- Forwarded values from other stages
+- `e_dstE`
+- `M_dstE`
+- `M_dstM`
+- `W_dstM`
+- `W_dstE`
 - `D_valC`
 - `D_valP`
+- `e_valE`
+- `M_valE`
+- `m_valM`
+- `W_valM`
+- `W_valE`
 
 ## Outputs
 
@@ -112,6 +121,8 @@ The ALU is instantiated in this stage, and the results of computations on `valA`
 ### Inputs
 
 - `E_stat`
+- `m_stat`
+- `W_stat`
 - `E_icode`
 - `E_ifun`
 - `E_dstE`
@@ -119,7 +130,6 @@ The ALU is instantiated in this stage, and the results of computations on `valA`
 - `E_valA`
 - `E_valB`
 - `E_valC`
-- Inputs from further stages
 
 ### Outputs
 
@@ -145,12 +155,13 @@ The portion of instructions that require the altering of or reading from data me
 
 ### Inputs
 
+- `M_cnd`
 - `M_stat`
 - `M_icode`
 - `M_valA`
 - `M_dstE`
 - `M_dstM`
-- `M_valP`
+- `M_valE`
 
 ### Outputs
 
@@ -162,7 +173,7 @@ The portion of instructions that require the altering of or reading from data me
 - `m_dstE`
 - `m_dstM`
 - `m_icode` 
-- `m_cndfwd`
+- `M_cndfwd`
 
 ### Other Parameters
 
@@ -202,7 +213,7 @@ This module takes no arguments as all the required files are included and the mo
 
 ## Register Array
 
-This module stores the data contained in all 14 registers and stack pointer using a two dimensional array `regArr`. It is capable of reading and writing to this array of registers depending on the input specifiers given, maximum being two at a time. It takes in the specifiers for the required registers and values (if applicable) to be written to them, and performs the required operations accordingly.
+This module stores the data contained in all 14 registers and stack pointer using a two dimensional array `regArr`. It is capable of reading and writing to this array of registers depending on the input specifiers given, maximum being two at a time. It takes in the specifiers for the required registers and values (if applicable) to be written to them, and performs the required operations accordingly. 
 
 ### Inputs
 
@@ -220,8 +231,20 @@ This module stores the data contained in all 14 registers and stack pointer usin
 - `valB`, value in the register specified by `rB`
 - `valStk`, value of the stack pointer `%rsp`
 
-### Results So Far
+### Results and Outputs
 
-The code for the processor compiles without any errors, and the executable file `a.out` runs without issues according to the instruction memory given. The output of the instructions given to the processor and the program state has been given in the `output.txt` file that has also been uploaded to the repository.
+The code for the processor compiles without any errors, and the executable file `a.out` runs without issues according to the instruction memory given. The output of the instructions given to the processor, however there are a few faults with the data forwarding logic that need to be dealt with. The test instructions run fine, and the data is being forwarded to previous stages.
+
+![Timing diagram of first instruction `irmovq`, register states](Pipeline/2022-03-10_04-32.png)
+
+![Timing diagram of third instruction `addq`, register states](Pipeline/2022-03-10_04-33.png)
+
+![Fetched bytes](Pipeline/2022-03-10_04-34.png)
+
+![PC update](Pipeline/2022-03-10_04-48.png)
+
+![Progression of values in pipeline](Pipeline/2022-03-10_04-46.png)
+
+![`icode` propagation through stages](Pipeline/icodeprop.png)
 
 ---
