@@ -190,13 +190,13 @@ module processor;
         .W_stat(W_stat), 
         .W_icode(W_icode), 
         .W_valE(W_valE), 
-        .W_valA(W_valA), 
+        .W_valM(W_valM), 
         .W_dstE(W_dstE), 
         .W_dstM(W_dstM), 
         .m_stat(m_stat), 
         .m_icode(m_icode), 
         .m_valE(m_valE), 
-        .m_valA(m_valA), 
+        .m_valM(m_valM), 
         .m_dstE(m_dstE), 
         .m_dstM(m_dstM));
     write_back write_back1(

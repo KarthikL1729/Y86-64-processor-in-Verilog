@@ -50,20 +50,28 @@ module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_val
       insmem[18] = 0;
       insmem[19] = 10;
 
-      insmem[20] = 16;
+      //insmem[20] = 16;
 
 
-      insmem[21] = 16;
+      //insmem[21] = 16;
 
+
+      //insmem[22] = 16;
+
+
+      insmem[20] = 96;
+      insmem[21] = 3;
 
       insmem[22] = 16;
 
 
-      insmem[23] = 96;
-      insmem[24] = 3;
+      insmem[23] = 16;
 
-      // insmem[28] = 96;
-      // insmem[29] = 3;
+
+      insmem[24] = 16;
+
+      insmem[25] = 96;
+      insmem[26] = 3;
 
       // insmem[30] = 64;
       // insmem[31] = 48;

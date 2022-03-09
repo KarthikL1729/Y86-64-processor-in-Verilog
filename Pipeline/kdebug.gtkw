@@ -1,0 +1,38 @@
+[*]
+[*] GTKWave Analyzer v3.3.111 (w)1999-2020 BSI
+[*] Wed Mar  9 20:05:31 2022
+[*]
+[dumpfile] "/home/karthik/Y86-64-processor-in-Verilog/Pipeline/processor.vcd"
+[dumpfile_mtime] "Wed Mar  9 19:52:49 2022"
+[dumpfile_size] 133179
+[savefile] "/home/karthik/Y86-64-processor-in-Verilog/Pipeline/kdebug.gtkw"
+[timestart] 0
+[size] 945 1023
+[pos] -1 -1
+*-4.077877 10 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] processor.
+[treeopen] processor.decode1.
+[sst_width] 211
+[signals_width] 134
+[sst_expanded] 1
+[sst_vpaned_height] 298
+@22
+processor.decode1.d_dstE[3:0]
+processor.decode1.d_dstM[3:0]
+processor.decode1.d_srcA[3:0]
+processor.decode1.d_srcB[3:0]
+processor.decode1.d_valA[63:0]
+processor.decode1.d_valB[63:0]
+processor.decode1.e_valE[63:0]
+processor.decode1.d_icode[3:0]
+processor.decode1.d_rvalA[63:0]
+processor.decode1.d_rvalA[63:0]
+processor.decode1.regfile.reg0[63:0]
+processor.decode1.regfile.reg3[63:0]
+processor.decode1.regfile.M[63:0]
+processor.decode1.regfile.E[63:0]
+processor.write_back1.W_valM[63:0]
+@23
+processor.write_back1.W_valE[63:0]
+[pattern_trace] 1
+[pattern_trace] 0
