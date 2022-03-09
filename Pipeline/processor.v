@@ -10,10 +10,11 @@
 `include "rexecute.v"
 `include "rmem.v"
 `include "rwback.v"
+`include "pipectrl.v"
 
 module processor;
 
-    reg clk;
+    reg clk, F_stall, D_bubble, D_stall, E_bubble;
     reg [3:0] f_stat, D_stat, d_stat, E_stat, e_stat, M_stat, m_stat, W_stat, w_stat, e_dstE, e_dstM, M_dstE, M_dstM, W_dstM, W_dstE, d_dstE, d_dstM, d_srcA, d_srcB, E_dstE, E_dstM, E_srcA, E_srcB, m_dstE, m_dstM, w_dstE, w_dstM;                                             // AOK, Halt, Inst error
     reg [63:0] PC, predPC, F_predPC;
     wire [63:0] valP, valM, valC;           //Only for pc_predict
@@ -40,13 +41,13 @@ module processor;
 
     pc_predict pc_predict1(.icode(icode), .PC(PC), .valP(valP), .valM(valM), .valC(valC), .predPC(predPC));  
 
-    rfetch rfetch1(.clk(clk), .predPC(predPC), .F_predPC(F_predPC));
+    rfetch rfetch1(.clk(clk), .F_stall(F_stall), .predPC(predPC), .F_predPC(F_predPC));
     fetch fetch1(.f_stat(f_stat), .PC(PC), .f_icode(f_icode), .f_ifun(f_ifun), .f_rA(f_rA), .f_rB(f_rB), .f_valC(f_valC), .f_valP(f_valP), .inst_valid(inst_valid), .imem_er(imem_er), .hlt_er(hlt_er));
     
-    rdecode rdecode1(.clk(clk), .f_stat(f_stat), .f_icode(f_icode), .f_ifun(f_ifun), .f_rA(f_rA), .f_rB(f_rB), .f_valC(f_valC), .f_valP(f_valP), .D_stat(D_stat), .D_icode(D_icode), .D_ifun(D_ifun), .D_rA(D_rA), .D_rB(D_rB), .D_valC(D_valC), .D_valP(D_valP));
+    rdecode rdecode1(.clk(clk), .D_stall(D_stall), .D_bubble(D_bubble), .f_stat(f_stat), .f_icode(f_icode), .f_ifun(f_ifun), .f_rA(f_rA), .f_rB(f_rB), .f_valC(f_valC), .f_valP(f_valP), .D_stat(D_stat), .D_icode(D_icode), .D_ifun(D_ifun), .D_rA(D_rA), .D_rB(D_rB), .D_valC(D_valC), .D_valP(D_valP));
     decode decode1(.D_stat(D_stat), .D_icode(D_icode), .D_ifun(D_ifun), .rA(rA), .rB(rB), .D_valC(D_valC), .D_valP(D_valP), .e_dstE(e_dstE), .e_valE(e_valE), .M_dstE(M_dstE), .M_valE(M_valE), .M_dstM(M_dstM), .m_valM(m_valM), .W_dstM(W_dstM), .W_valM(W_valM), .W_dstE(W_dstE), .W_valE(W_valE), .d_stat(d_stat), .d_icode(d_icode), .d_ifun(d_ifun), .d_valC(d_valC), .d_valA(d_valA), .d_valB(d_valB), .d_dstE(d_dstE), .d_dstM(d_dstM), .d_srcA(d_srcA), .d_srcB(d_srcB));
     
-    rexecute rexecute1(.clk(clk), .d_stat(d_stat), .d_icode(d_icode), .d_ifun(d_ifun), .d_valC(d_valC), .d_valA(d_valA), .d_valB(d_valB), .d_dstE(d_dstE), .d_dstM(d_dstM), .d_srcA(d_srcA), .d_srcB(d_srcB), .E_stat(E_stat), .E_icode(E_icode), .E_ifun(E_ifun), .E_valC(E_valC), .E_valA(E_valA), .E_valB(E_valB), .E_dstE(E_dstE), .E_dstM(E_dstM), .E_srcA(E_srcA), .E_srcB(E_srcB));
+    rexecute rexecute1(.clk(clk), .E_bubble(E_bubble), .d_stat(d_stat), .d_icode(d_icode), .d_ifun(d_ifun), .d_valC(d_valC), .d_valA(d_valA), .d_valB(d_valB), .d_dstE(d_dstE), .d_dstM(d_dstM), .d_srcA(d_srcA), .d_srcB(d_srcB), .E_stat(E_stat), .E_icode(E_icode), .E_ifun(E_ifun), .E_valC(E_valC), .E_valA(E_valA), .E_valB(E_valB), .E_dstE(E_dstE), .E_dstM(E_dstM), .E_srcA(E_srcA), .E_srcB(E_srcB));
     execute execute1(.E_stat(E_stat), .E_icode(E_icode), .E_ifun(E_ifun), .E_valA(E_valA), .E_valB(E_valB), .E_valC(E_valC), .E_dstE(E_dstE), .E_dstM(E_dstM), .e_icode(e_icode), .e_valE(e_valE), .e_stat(e_stat), .e_dstE(e_dstE), .e_dstM(e_dstM), .e_valA(e_valA), .zf(zf), .of(of), .sf(sf), .e_cnd(e_cnd), .W_stat(W_stat), .m_stat(m_stat));
     
     rmem rmem1(.clk(clk), .e_stat(e_stat), .e_icode(e_icode), .e_cnd(e_cnd), .e_valE(e_valE) .e_valA(e_valA), .e_dstE(e_dstE), .e_dstM(e_dstM), .M_stat(M_stat), .M_icode(M_icode), .M_cnd(M_cnd), .M_valE(M_valE), .M_valA(M_valA), .M_dstE(M_dstE), .M_dstM(M_dstM));
@@ -54,7 +55,9 @@ module processor;
     
     rwback rwback1(.clk(clk), .W_stat(W_stat), .W_icode(W_icode), .W_valE(W_valE), .W_valA(W_valA), .W_dstE(W_dstE), .W_dstM(W_dstM), .m_stat(m_stat), .m_icode(m_icode), .m_valE(m_valE), .m_valA(m_valA), .m_dstE(m_dstE), .m_dstM(m_dstM));
     write_back write_back1(.W_stat(W_stat), .W_icode(W_icode), .W_valE(W_valE), .W_valM(W_valM), .W_dstE(W_dstE), .W_dstM(W_dstM), .w_stat(w_stat), .w_icode(w_icode), .w_valE(w_valE), .w_valM(w_valM), .w_dstE(w_dstE), .w_dstM(w_dstM));
-            
+    
+    pipectrl pipectrl1(.d_srcA(d_srcA), .d_srcB(d_srcB), .D_icode(D_icode), .E_dstM(E_dstM), .E_icode(E_icode), .e_cnd(e_cnd), .M_icode(M_icode), .m_stat(m_stat), .W_stat(W_stat), .F_stall(F_stall), .D_bubble(D_bubble), .D_stall(D_stall), .E_bubble(E_bubble));
+
     always #1 clk=~clk;
 
     always @(*) begin
