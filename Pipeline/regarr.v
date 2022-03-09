@@ -9,6 +9,9 @@ module regarr(srcA, srcB, valA, valB, valStk, dstM, dstE, M, E);
 
     reg [63:0] regArr[14:0];
 
+    wire [63:0] reg0 = regArr[0];
+    wire [63:0] reg3 = regArr[3];
+
     always @(srcA, srcB) begin
         valA = regArr[srcA];
         valB = regArr[srcB];

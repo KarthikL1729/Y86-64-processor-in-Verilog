@@ -1,12 +1,12 @@
 //`include "pc_predict.v"
 `include "pc_select.v"
 
-module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid, imem_er, hlt_er, predPC);
+module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid, imem_er, hlt_er, predPC, M_icode, W_icode, M_valA, W_valM, f_PC);
 
   input [63:0] F_PC;
-  wire clk, M_cnd;
-  wire[3:0] M_icode, W_icode;
-  wire[63:0] M_valA, W_valM, f_PC; 
+  input clk, M_cnd;
+  input [3:0] M_icode, W_icode;
+  input [63:0] M_valA, W_valM, f_PC; 
   output reg [3:0] f_stat;
   output reg [3:0] f_icode;
   output reg [3:0] f_ifun;
@@ -26,6 +26,7 @@ module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_val
    
 
   initial begin
+    
       insmem[0] = 48;
       insmem[1] = 240;
       insmem[2] = 0;
@@ -48,47 +49,57 @@ module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_val
       insmem[18] = 0;
       insmem[19] = 10;
 
-      insmem[20] = 96;
-      insmem[21] = 3;
+      insmem[20] = 16;
 
-      insmem[22] = 96;
-      insmem[23] = 3;
 
-      insmem[24] = 64;
-      insmem[25] = 48;
-      insmem[26] = 0;
-      insmem[27] = 0;
-      insmem[28] = 0;
-      insmem[29] = 0;
-      insmem[30] = 0;
-      insmem[31] = 0;
-      insmem[32] = 0;
-      insmem[33] = 5;
+      insmem[21] = 16;
 
-      insmem[34] =80;
-      insmem[35] = 32;
-      insmem[36] = 0;
-      insmem[37] = 0;
-      insmem[38] = 0;
-      insmem[39] = 0;
-      insmem[40] = 0;
-      insmem[41] = 0;
-      insmem[42] = 0;
-      insmem[43] = 5;
 
-      insmem[44] = 96;
-      insmem[45] = 2;
+      insmem[22] = 16;
 
-      insmem[46] = 33;
-      insmem[47] = 32;
 
-      insmem[48] = 96;
-      insmem[49] = 32;
+      insmem[23] = 96;
+      insmem[24] = 3;
 
-      insmem[50] = 33;
-      insmem[51] = 0;
+      // insmem[28] = 96;
+      // insmem[29] = 3;
+
+      // insmem[30] = 64;
+      // insmem[31] = 48;
+      // insmem[32] = 0;
+      // insmem[33] = 0;
+      // insmem[34] = 0;
+      // insmem[35] = 0;
+      // insmem[36] = 0;
+      // insmem[37] = 0;
+      // insmem[38] = 0;
+      // insmem[39] = 5;
+
+      // insmem[40] =80;
+      // insmem[41] = 32;
+      // insmem[42] = 0;
+      // insmem[43] = 0;
+      // insmem[44] = 0;
+      // insmem[45] = 0;
+      // insmem[46] = 0;
+      // insmem[47] = 0;
+      // insmem[48] = 0;
+      // insmem[49] = 5;
+
+      // insmem[50] = 96;
+      // insmem[51] = 2;
+
+      // insmem[52] = 33;
+      // insmem[53] = 32;
+
+      // insmem[54] = 96;
+      // insmem[55] = 32;
+
+      // insmem[56] = 33;
+      // insmem[57] = 0;
 
       predPC = 0;
+
   end
 
   always @(f_PC) begin
