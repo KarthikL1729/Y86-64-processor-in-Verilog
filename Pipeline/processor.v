@@ -3,8 +3,6 @@
 `include "execute.v"
 `include "memory.v"
 `include "write_back.v"
-`include "pc_predict.v"
-`include "pc_select.v"
 `include "rfetch.v"
 `include "rdecode.v"
 `include "rexecute.v"
@@ -15,9 +13,11 @@
 module processor;
 
     reg clk;
+    reg [63:0] PC;
+    wire [63:0] f_PC;
     wire F_stall, D_bubble, D_stall, E_bubble;
     wire [3:0] f_stat, D_stat, d_stat, E_stat, e_stat, M_stat, m_stat, W_stat, w_stat, e_dstE, e_dstM, M_dstE, M_dstM, W_dstM, W_dstE, d_dstE, d_dstM, d_srcA, d_srcB, E_dstE, E_dstM, E_srcA, E_srcB, m_dstE, m_dstM, w_dstE, w_dstM, rA, rB;                                             // AOK, Halt, Inst error
-    wire [63:0] PC, predPC, F_predPC;
+    wire [63:0] predPC, F_predPC;
     wire [63:0] valP, valM, valC;           //Only for pc_predict
     wire [63:0] f_valP, f_valC, D_valC, D_valP, e_valA, e_valE, M_valE, M_valA, m_valE, m_valM, W_valM, W_valE, d_valC, d_valA, d_valB, E_valA, E_valB, E_valC, w_valE, w_valM, W_valA, m_valA;
     wire inst_valid, imem_er, hlt_er, zf, sf, of, e_cnd, M_cnd;
@@ -31,13 +31,11 @@ module processor;
         $dumpvars(0, processor);
 
         clk = 1;
-
-        #20 $finish;
+        PC = 0;
+        #50 $finish;
 
     end
 
-    pc_predict pc_predict1(.icode(icode), .PC(PC), .valP(valP), .valM(valM), .valC(valC), .predPC(predPC));  
-    pc_select pc_select1(.M_icode(M_icode), .M_cnd(M_cnd), .M_valA(M_valA), .W_icode(W_icode), .W_valM(W_valM), .F_predPC(F_predPC), .PC(PC));
     rfetch rfetch1(.clk(clk), .F_stall(F_stall), .predPC(predPC), .F_predPC(F_predPC));
     fetch fetch1(.f_stat(f_stat), .PC(PC), .f_icode(f_icode), .f_ifun(f_ifun), .f_rA(f_rA), .f_rB(f_rB), .f_valC(f_valC), .f_valP(f_valP), .inst_valid(inst_valid), .imem_er(imem_er), .hlt_er(hlt_er));
     

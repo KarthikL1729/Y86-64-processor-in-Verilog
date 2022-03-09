@@ -1,12 +1,18 @@
+`include "pc_predict.v"
+`include "pc_select.v"
+
 module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid, imem_er, hlt_er);
 
   input [63:0] PC;
+  wire clk, M_cnd;
+  wire[3:0] M_icode, W_icode;
+  wire[63:0] predPC, PC, M_valA, W_valM, F_predPC, f_PC; 
   output reg [3:0] f_stat;
   output reg [3:0] f_icode;
   output reg [3:0] f_ifun;
   output reg [3:0] f_rA;
   output reg [3:0] f_rB; 
-  output reg [63:0] f_valC;
+  output reg [63:0] f_valC; //predPC;
   output reg [63:0] f_valP;
   output reg inst_valid;         //f_status condition for instruction invalidity
   output reg imem_er;            //f_status condition for invalid address
@@ -14,6 +20,10 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid
   output reg dmem_er;            //f_status condition for data memory error 
   reg [7:0] insmem[2047:0];      //2kB of instruction memory cause why not
   reg [0:79] inst;               //10 byte max length for instruction
+
+  pc_predict pc_predict1(.f_icode(f_icode), .f_valP(f_valP), .f_valC(f_valC), .predPC(predPC));  
+  pc_select pc_select1(.PC(PC), .M_icode(M_icode), .M_cnd(M_cnd), .M_valA(M_valA), .W_icode(W_icode), .W_valM(W_valM), .F_predPC(F_predPC), .f_PC(f_PC));
+   
 
   initial begin
       insmem[0] = 48;
@@ -159,9 +169,20 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid
           f_stat[1] = 0;
           f_stat[2] = 0;
       end
-      if (f_stat[1] == 1 || f_stat[2] == 1 || f_stat[3] == 1) begin
-          $finish;                                                //Instruction invalid error or halt encountered, stop everything.
-      end
+      //if (f_stat[1] == 1 || f_stat[2] == 1 || f_stat[3] == 1) begin
+      //    $finish;                                                //Instruction invalid error or halt encountered, stop everything.
+      //end
+//
+      //if (f_icode == 2 || f_icode == 3 || f_icode == 4 || f_icode == 5 || f_icode == 6 || f_icode == 10 || f_icode == 11) begin                                                                          //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
+      //    predPC = f_valP;
+      //end
+      //else if (f_icode == 7) begin                                                   //jXX
+      //    predPC = f_valC;
+      //end
+      //else if (f_icode == 8) begin                                                  //call
+      //    predPC = f_valC;
+      //end
+
   end
 
   always @(*) begin
