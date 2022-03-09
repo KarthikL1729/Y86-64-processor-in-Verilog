@@ -37,7 +37,7 @@ module processor;
     end
 
     rfetch rfetch1(.clk(clk), .F_stall(F_stall), .predPC(predPC), .F_predPC(F_predPC));
-    fetch fetch1(.f_stat(f_stat), .PC(PC), .f_icode(f_icode), .f_ifun(f_ifun), .f_rA(f_rA), .f_rB(f_rB), .f_valC(f_valC), .f_valP(f_valP), .inst_valid(inst_valid), .imem_er(imem_er), .hlt_er(hlt_er));
+    fetch fetch1(.f_stat(f_stat), .F_PC(F_predPC), .f_icode(f_icode), .f_ifun(f_ifun), .f_rA(f_rA), .f_rB(f_rB), .f_valC(f_valC), .f_valP(f_valP), .inst_valid(inst_valid), .imem_er(imem_er), .hlt_er(hlt_er), .predPC(predPC));
     
     rdecode rdecode1(.clk(clk), .D_stall(D_stall), .D_bubble(D_bubble), .f_stat(f_stat), .f_icode(f_icode), .f_ifun(f_ifun), .f_rA(f_rA), .f_rB(f_rB), .f_valC(f_valC), .f_valP(f_valP), .D_stat(D_stat), .D_icode(D_icode), .D_ifun(D_ifun), .D_rA(D_rA), .D_rB(D_rB), .D_valC(D_valC), .D_valP(D_valP));
     decode decode1(.D_stat(D_stat), .D_icode(D_icode), .D_ifun(D_ifun), .rA(rA), .rB(rB), .D_valC(D_valC), .D_valP(D_valP), .e_dstE(e_dstE), .e_valE(e_valE), .M_dstE(M_dstE), .M_valE(M_valE), .M_dstM(M_dstM), .m_valM(m_valM), .W_dstM(W_dstM), .W_valM(W_valM), .W_dstE(W_dstE), .W_valE(W_valE), .d_stat(d_stat), .d_icode(d_icode), .d_ifun(d_ifun), .d_valC(d_valC), .d_valA(d_valA), .d_valB(d_valB), .d_dstE(d_dstE), .d_dstM(d_dstM), .d_srcA(d_srcA), .d_srcB(d_srcB));

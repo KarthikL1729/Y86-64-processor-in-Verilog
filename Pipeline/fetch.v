@@ -1,18 +1,18 @@
-`include "pc_predict.v"
+//`include "pc_predict.v"
 `include "pc_select.v"
 
-module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid, imem_er, hlt_er);
+module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid, imem_er, hlt_er, predPC);
 
-  input [63:0] PC;
+  input [63:0] F_PC;
   wire clk, M_cnd;
   wire[3:0] M_icode, W_icode;
-  wire[63:0] predPC, PC, M_valA, W_valM, F_predPC, f_PC; 
+  wire[63:0] M_valA, W_valM, f_PC; 
   output reg [3:0] f_stat;
   output reg [3:0] f_icode;
   output reg [3:0] f_ifun;
   output reg [3:0] f_rA;
   output reg [3:0] f_rB; 
-  output reg [63:0] f_valC; //predPC;
+  output reg [63:0] f_valC, predPC;
   output reg [63:0] f_valP;
   output reg inst_valid;         //f_status condition for instruction invalidity
   output reg imem_er;            //f_status condition for invalid address
@@ -21,8 +21,8 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid
   reg [7:0] insmem[2047:0];      //2kB of instruction memory cause why not
   reg [0:79] inst;               //10 byte max length for instruction
 
-  pc_predict pc_predict1(.f_icode(f_icode), .f_valP(f_valP), .f_valC(f_valC), .predPC(predPC));  
-  pc_select pc_select1(.PC(PC), .M_icode(M_icode), .M_cnd(M_cnd), .M_valA(M_valA), .W_icode(W_icode), .W_valM(W_valM), .F_predPC(F_predPC), .f_PC(f_PC));
+  //pc_predict pc_predict1(.f_icode(f_icode), .f_valP(f_valP), .f_valC(f_valC), .predPC(predPC));  
+  pc_select pc_select1(.M_icode(M_icode), .M_cnd(M_cnd), .M_valA(M_valA), .W_icode(W_icode), .W_valM(W_valM), .F_predPC(F_PC), .f_PC(f_PC));
    
 
   initial begin
@@ -88,17 +88,17 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid
       insmem[50] = 33;
       insmem[51] = 0;
 
-      
+      predPC = 0;
   end
 
-  always @(PC) begin
+  always @(f_PC) begin
 
-      if(PC > 2047) begin
+      if(f_PC > 2047) begin
         imem_er = 1;               //Invalid address, out of scope
       end
         dmem_er = 0;               //Data memory error, initialised to zero
 
-      inst = {insmem[PC], insmem[PC + 1], insmem[PC + 2], insmem[PC + 3], insmem[PC + 4], insmem[PC + 5], insmem[PC + 6], insmem[PC + 7], insmem[PC + 8], insmem[PC + 9]};   //Fetching 10 bytes
+      inst = {insmem[f_PC], insmem[f_PC + 1], insmem[f_PC + 2], insmem[f_PC + 3], insmem[f_PC + 4], insmem[f_PC + 5], insmem[f_PC + 6], insmem[f_PC + 7], insmem[f_PC + 8], insmem[f_PC + 9]};   //Fetching 10 bytes
       
       f_icode = inst[0:3];          //Instruction specifier
       f_ifun = inst[4:7];           //Function specifier for xx instructions
@@ -107,39 +107,39 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid
       
       if(f_icode == 0) begin        //halt instruction encountered
         hlt_er = 1;
-        f_valP = PC + 1;
+        f_valP = f_PC + 1;
       end          
       else if (f_icode == 1) begin  //nop instruction encountered
-        f_valP = PC + 1;
+        f_valP = f_PC + 1;
       end
       else if (f_icode == 2) begin  //cmovxx instruction encountered
-        f_valP = PC + 2; 
+        f_valP = f_PC + 2; 
         f_rA = inst[8:11];
         f_rB = inst[12:15];         //Register specifiers
       end     
       else if (f_icode == 3 || f_icode == 4 || f_icode == 5) begin  
                                   //irmovq/rmmovq/mrmovq instruction encountered
-        f_valP = PC + 10;
+        f_valP = f_PC + 10;
         f_rA = inst[8:11];
         f_rB = inst[12:15];         //Register specifiers
         f_valC = inst[16:79];       //Constant value
       end
       else if (f_icode == 6) begin  //OPq instruction encountered
-        f_valP = PC + 2;
+        f_valP = f_PC + 2;
         f_rA = inst[8:11];
         f_rB = inst[12:15];         //Register specifiers
       end
       else if (f_icode == 7 || f_icode == 8) begin  
                                   //jxx/call instruction encountered
-        f_valP = PC + 9;
+        f_valP = f_PC + 9;
         f_valC = inst[8:71];
       end
       else if (f_icode == 9) begin  //ret instruction encountered
-        f_valP = PC + 1;
+        f_valP = f_PC + 1;
       end
       else if (f_icode == 10 || f_icode == 11) begin 
                                   //pushq/popq instruction encountered
-        f_valP = PC + 2;
+        f_valP = f_PC + 2;
         f_rA = inst[8:11];
         f_rB = inst[12:15];
       end
@@ -148,7 +148,19 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid
       end
   end
 
-  always @(PC) begin
+  always @(f_icode, f_valP, f_valC) begin
+      if (f_icode == 2 || f_icode == 3 || f_icode == 4 || f_icode == 5 || f_icode == 6 || f_icode == 10 || f_icode == 11) begin                                                                          //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
+         predPC = f_valP;
+      end
+      else if (f_icode == 7) begin                                                   //jXX
+         predPC = f_valC;
+      end
+      else if (f_icode == 8) begin                                                  //call
+         predPC = f_valC;
+      end
+  end
+
+  always @(f_PC) begin
       
       //$display("Hibro");
       if (inst_valid) begin
@@ -169,21 +181,25 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid
           f_stat[1] = 0;
           f_stat[2] = 0;
       end
-      //if (f_stat[1] == 1 || f_stat[2] == 1 || f_stat[3] == 1) begin
-      //    $finish;                                                //Instruction invalid error or halt encountered, stop everything.
-      //end
-//
-      //if (f_icode == 2 || f_icode == 3 || f_icode == 4 || f_icode == 5 || f_icode == 6 || f_icode == 10 || f_icode == 11) begin                                                                          //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
-      //    predPC = f_valP;
-      //end
-      //else if (f_icode == 7) begin                                                   //jXX
-      //    predPC = f_valC;
-      //end
-      //else if (f_icode == 8) begin                                                  //call
-      //    predPC = f_valC;
-      //end
+
+
+      if (f_stat[1] == 1 || f_stat[2] == 1 || f_stat[3] == 1) begin
+         $finish;                                                //Instruction invalid error or halt encountered, stop everything.
+      end
 
   end
+
+  initial begin
+        if (f_icode == 2 || f_icode == 3 || f_icode == 4 || f_icode == 5 || f_icode == 6 || f_icode == 10 || f_icode == 11) begin                                                                          //cmovXX, irmovq, rmmovq, mrmovq, OPq, pushq, popq
+            predPC = f_valP;
+        end
+        else if (f_icode == 7) begin                                                   //jXX
+            predPC = f_valC;
+        end
+        else if (f_icode == 8) begin                                                  //call
+            predPC = f_valC;
+        end
+    end
 
   always @(*) begin
     $display("Bits fetched = %b", inst);

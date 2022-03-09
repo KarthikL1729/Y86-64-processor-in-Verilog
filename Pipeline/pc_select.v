@@ -1,4 +1,4 @@
-module pc_select(PC, M_icode, M_cnd, M_valA, W_icode, W_valM, F_predPC, f_PC);
+module pc_select(M_icode, M_cnd, M_valA, W_icode, W_valM, F_predPC, f_PC);
 
     input M_cnd;
     input [3:0] M_icode, W_icode;

@@ -1,6 +1,6 @@
-`include "/home/karthik/Y86-64-processor-in-Verilog/Pipeline/ALU/And/and_64.v"
-`include "/home/karthik/Y86-64-processor-in-Verilog/Pipeline/ALU/Sub/sub_64.v"
-`include "/home/karthik/Y86-64-processor-in-Verilog/Pipeline/ALU/Xor/xor_64.v"
+`include "/home/sane/Y86-64-processor-in-Verilog/Pipeline/ALU/And/and_64.v"
+`include "/home/sane/Y86-64-processor-in-Verilog/Pipeline/ALU/Sub/sub_64.v"
+`include "/home/sane/Y86-64-processor-in-Verilog/Pipeline/ALU/Xor/xor_64.v"
 module ALU_64(opcode, a, b, res, overflow, zero); 
 
     input signed [63:0] a, b;
