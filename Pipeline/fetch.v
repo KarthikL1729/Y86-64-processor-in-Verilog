@@ -70,8 +70,8 @@ module fetch(f_stat, F_PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_val
 
       //insmem[24] = 16;
 
-      insmem[22] = 96;
-      insmem[23] = 3;
+      //insmem[22] = 96;
+      //insmem[23] = 3;
 
       // insmem[30] = 64;
       // insmem[31] = 48;

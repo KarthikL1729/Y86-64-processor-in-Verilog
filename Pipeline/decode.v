@@ -25,27 +25,27 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
 
         case (D_icode)
             2: begin    //cmovxx
-                //d_dstE = 15;
+                d_dstE = 15;
                 d_dstM = rB;
                 d_srcA = rA;
-                //d_srcB = 15;
+                d_srcB = 15;
             end
             3: begin    //irmovq
                 d_dstE = rB;
-                //d_dstM = 15;
-                //d_srcA = 15;
-                //d_srcB = 15;
+                d_dstM = 15;
+                d_srcA = 15;
+                d_srcB = 15;
             end
             4: begin    //rmmovq
                 d_dstE = rB;
-                //d_dstM = 15;
+                d_dstM = 15;
                 d_srcA = rA;
                 d_srcB = rB;
             end
             5: begin    //mrmovq
-                //d_dstE = 15;
+                d_dstE = 15;
                 d_dstM = rA;
-                //d_srcA = 15;
+                d_srcA = 15;
                 d_srcB = rB;
             end
             6: begin    //opq
@@ -56,19 +56,19 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
             end
             8: begin    //call  
                 d_dstE = 14;
-                //d_dstM = 15;
-                //d_srcA = 15;
+                d_dstM = 15;
+                d_srcA = 15;
                 d_srcB = 14;
             end
             9: begin    //ret
                 d_dstE = 14;
-                //d_dstM = 15;
+                d_dstM = 15;
                 d_srcA = 14;
                 d_srcB = 14;
             end
             10: begin   //pushq
                 d_dstE = 14;
-                //d_dstM = 15;
+                d_dstM = 15;
                 d_srcA = rA;
                 d_srcB = 14;
             end
@@ -79,10 +79,10 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
                 d_srcB = 14;
             end
             default: begin
-                //d_dstE = 15;
-                //d_dstM = 15;
-                //d_srcA = 15;
-                //d_srcB = 15;
+                d_dstE = 15;
+                d_dstM = 15;
+                d_srcA = 15;
+                d_srcB = 15;
             end
         endcase
 
@@ -91,43 +91,39 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
         if(D_icode == 8 || D_icode == 7) begin
             d_valA = D_valP;
         end
-        if(d_srcA == W_dstE) begin
-            d_valA = W_valE;
-        end
-        if(d_srcA == W_dstM) begin
-            d_valA = W_valM;
-        end
-        if(d_srcA == M_dstE) begin
-            d_valA = M_valE;
+        if(d_srcA == e_dstE) begin
+            d_valA = e_valE;
         end
         if(d_srcA == M_dstM) begin
             d_valA = m_valM;
         end
-        if(d_srcA == e_dstE) begin
-            d_valA = e_valE;
+        if(d_srcA == M_dstE) begin
+            d_valA = M_valE;
+        end
+        if(d_srcA == W_dstM) begin
+            d_valA = W_valM;
+        end
+        if(d_srcA == W_dstE) begin
+            d_valA = W_valE;
         end
 
         d_valB = d_rvalB;
 
-        if(d_srcB == W_dstE) begin
-            d_valB = W_valE;
-        end
-        if(d_srcB == W_dstM) begin
-            d_valB = W_valM;
-        end
-        if(d_srcB == M_dstE) begin
-            d_valB = M_valE;
+        if(d_srcB == e_dstE) begin
+            d_valB = e_valE;
         end
         if(d_srcB == M_dstM) begin
             d_valB = m_valM;
         end
-        if(d_srcB == e_dstE) begin
-            d_valB = e_valE;
+        if(d_srcB == M_dstE) begin
+            d_valB = M_valE;
         end
-        
-        
-        
-        
+        if(d_srcB == W_dstM) begin
+            d_valB = W_valM;
+        end
+        if(d_srcB == W_dstE) begin
+            d_valB = W_valE;
+        end
          
     end
 
