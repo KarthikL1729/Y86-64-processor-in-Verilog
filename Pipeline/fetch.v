@@ -138,7 +138,7 @@ module fetch(f_stat, PC, f_icode, f_ifun, f_rA, f_rB, f_valC, f_valP, inst_valid
       end
   end
 
-  always @(posedge clk) begin
+  always @(PC) begin
       
       //$display("Hibro");
       if (inst_valid) begin

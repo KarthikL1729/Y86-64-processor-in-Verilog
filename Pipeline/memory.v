@@ -1,8 +1,8 @@
-module memory(M_stat, M_icode, M_cnd, M_valE, M_valA, M_dstE, M_dstM, m_stat, m_icode, m_valE, m_valM, m_dstE, m_dstM, M_cndfwd, M_valAfwd, M_valEfwd)
+module memory(M_stat, M_icode, M_cnd, M_valE, M_valA, M_dstE, M_dstM, m_stat, m_icode, m_valE, m_valM, m_dstE, m_dstM, M_cndfwd, M_valAfwd, M_valEfwd);
 
     input M_cnd;
     input [3:0] M_stat;
-    input [3:0] M_icode M_dstE, M_dstM;
+    input [3:0] M_icode, M_dstE, M_dstM;
     input [63:0] M_valA, M_valE;
 
     output reg [63:0] m_valE, m_valM, M_valAfwd, M_valEfwd; 

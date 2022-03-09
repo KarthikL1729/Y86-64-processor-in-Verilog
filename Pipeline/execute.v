@@ -5,7 +5,7 @@ module execute(E_stat, E_icode, E_ifun, E_valA, E_valB, E_valC, E_dstE, E_dstM, 
     input [3:0] E_stat, W_stat, m_stat;
     input [3:0] E_icode, E_ifun, E_dstE, E_dstM;
     input [63:0] E_valA, E_valB, E_valC;
-    output reg [3:0] e_icode;
+    output reg [3:0] e_icode, e_dstE, e_dstM;
     output reg [63:0] e_valE, e_valA;
     output reg e_cnd, zf, of, sf;                                     // e_cnd is conditional move/jump flag
     output reg [3:0] e_stat;

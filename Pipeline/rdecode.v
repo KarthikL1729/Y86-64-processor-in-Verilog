@@ -1,10 +1,10 @@
 module rdecode(clk, D_stall, D_bubble, f_stat, f_icode, f_ifun ,f_rA, f_rB, f_valC, f_valP, D_stat, D_icode, D_ifun ,D_rA, D_rB, D_valC, D_valP);
 
     input clk, D_stall, D_bubble;
-    input [2:0] f_stat;
+    input [3:0] f_stat;
     input [3:0] f_icode, f_ifun, f_rA, f_rB;
     input [63:0] f_valC, f_valP;
-    output reg [1:0] D_stat;
+    output reg [3:0] D_stat;
     output reg [3:0] D_icode, D_ifun, D_rA, D_rB;
     output reg [63:0] D_valC, D_valP;
 

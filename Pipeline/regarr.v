@@ -9,7 +9,7 @@ module regarr(srcA, srcB, valA, valB, valStk, dstM, dstE, M, E);
 
     reg [63:0] regArr[14:0];
 
-    always @(srcA, srcB, PC) begin
+    always @(srcA, srcB) begin
         valA = regArr[srcA];
         valB = regArr[srcB];
         valStk = regArr[14];

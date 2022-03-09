@@ -12,7 +12,7 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
     output reg [63:0] d_valC, d_valA, d_valB;
     output reg [3:0] d_dstE, d_dstM, d_srcA, d_srcB;                          // regArr[14] is stack pointer  
 
-    reg [63:0] d_rvalA, d_rvalB, valStk;
+    wire [63:0] d_rvalA, d_rvalB, valStk;
 
     regarr regfile(.srcA(d_srcA), .srcB(d_srcB), .valA(d_rvalA), .valB(d_rvalB), .valStk(valStk), .dstM(W_dstM), .dstE(W_dstE), .M(W_valM), .E(W_valE));
 
@@ -23,7 +23,7 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
         d_ifun = D_ifun;
         d_valC = D_valC;
 
-        case (icode)
+        case (D_icode)
             2: begin    //cmovxx
                 d_dstE = 15;
                 d_dstM = rB;
@@ -124,11 +124,7 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
         if(d_srcB == W_dstE) begin
             d_valB = W_valE;
         end
-        
-
-
-
-        
+         
     end
 
 endmodule
