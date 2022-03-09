@@ -1,0 +1,109 @@
+[*]
+[*] GTKWave Analyzer v3.3.111 (w)1999-2020 BSI
+[*] Wed Mar  9 22:04:50 2022
+[*]
+[dumpfile] "/home/karthik/Y86-64-processor-in-Verilog/Pipeline/processor.vcd"
+[dumpfile_mtime] "Wed Mar  9 21:32:12 2022"
+[dumpfile_size] 132724
+[savefile] "/home/karthik/Y86-64-processor-in-Verilog/Pipeline/ok.gtkw"
+[timestart] 0
+[size] 945 1023
+[pos] -1 -1
+*-2.895269 12 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] processor.
+[treeopen] processor.decode1.
+[sst_width] 211
+[signals_width] 286
+[sst_expanded] 1
+[sst_vpaned_height] 279
+@22
+processor.decode1.regfile.reg3[63:0]
+processor.decode1.regfile.reg0[63:0]
+processor.decode1.regfile.M[63:0]
+processor.decode1.W_valM[63:0]
+processor.write_back1.w_valM[63:0]
+processor.rwback1.W_valM[63:0]
+@c00022
+processor.write_back1.W_valM[63:0]
+@28
+(0)processor.write_back1.W_valM[63:0]
+(1)processor.write_back1.W_valM[63:0]
+(2)processor.write_back1.W_valM[63:0]
+(3)processor.write_back1.W_valM[63:0]
+(4)processor.write_back1.W_valM[63:0]
+(5)processor.write_back1.W_valM[63:0]
+(6)processor.write_back1.W_valM[63:0]
+(7)processor.write_back1.W_valM[63:0]
+(8)processor.write_back1.W_valM[63:0]
+(9)processor.write_back1.W_valM[63:0]
+(10)processor.write_back1.W_valM[63:0]
+(11)processor.write_back1.W_valM[63:0]
+(12)processor.write_back1.W_valM[63:0]
+(13)processor.write_back1.W_valM[63:0]
+(14)processor.write_back1.W_valM[63:0]
+(15)processor.write_back1.W_valM[63:0]
+(16)processor.write_back1.W_valM[63:0]
+(17)processor.write_back1.W_valM[63:0]
+(18)processor.write_back1.W_valM[63:0]
+(19)processor.write_back1.W_valM[63:0]
+(20)processor.write_back1.W_valM[63:0]
+(21)processor.write_back1.W_valM[63:0]
+(22)processor.write_back1.W_valM[63:0]
+(23)processor.write_back1.W_valM[63:0]
+(24)processor.write_back1.W_valM[63:0]
+(25)processor.write_back1.W_valM[63:0]
+(26)processor.write_back1.W_valM[63:0]
+(27)processor.write_back1.W_valM[63:0]
+(28)processor.write_back1.W_valM[63:0]
+(29)processor.write_back1.W_valM[63:0]
+(30)processor.write_back1.W_valM[63:0]
+(31)processor.write_back1.W_valM[63:0]
+(32)processor.write_back1.W_valM[63:0]
+(33)processor.write_back1.W_valM[63:0]
+(34)processor.write_back1.W_valM[63:0]
+(35)processor.write_back1.W_valM[63:0]
+(36)processor.write_back1.W_valM[63:0]
+(37)processor.write_back1.W_valM[63:0]
+(38)processor.write_back1.W_valM[63:0]
+(39)processor.write_back1.W_valM[63:0]
+(40)processor.write_back1.W_valM[63:0]
+(41)processor.write_back1.W_valM[63:0]
+(42)processor.write_back1.W_valM[63:0]
+(43)processor.write_back1.W_valM[63:0]
+(44)processor.write_back1.W_valM[63:0]
+(45)processor.write_back1.W_valM[63:0]
+(46)processor.write_back1.W_valM[63:0]
+(47)processor.write_back1.W_valM[63:0]
+(48)processor.write_back1.W_valM[63:0]
+(49)processor.write_back1.W_valM[63:0]
+(50)processor.write_back1.W_valM[63:0]
+(51)processor.write_back1.W_valM[63:0]
+(52)processor.write_back1.W_valM[63:0]
+(53)processor.write_back1.W_valM[63:0]
+(54)processor.write_back1.W_valM[63:0]
+(55)processor.write_back1.W_valM[63:0]
+(56)processor.write_back1.W_valM[63:0]
+(57)processor.write_back1.W_valM[63:0]
+(58)processor.write_back1.W_valM[63:0]
+(59)processor.write_back1.W_valM[63:0]
+(60)processor.write_back1.W_valM[63:0]
+(61)processor.write_back1.W_valM[63:0]
+(62)processor.write_back1.W_valM[63:0]
+(63)processor.write_back1.W_valM[63:0]
+@1401200
+-group_end
+@22
+processor.rwback1.m_valM[63:0]
+processor.rmem1.M_valA[63:0]
+processor.rmem1.M_valE[63:0]
+processor.fetch1.inst[0:79]
+processor.decode1.d_valA[63:0]
+processor.decode1.d_valB[63:0]
+processor.memory1.M_dstE[3:0]
+processor.decode1.d_srcB[3:0]
+processor.decode1.W_dstM[3:0]
+processor.decode1.W_dstE[3:0]
+@23
+processor.decode1.e_valE[63:0]
+[pattern_trace] 1
+[pattern_trace] 0

@@ -26,6 +26,7 @@ module memory(M_stat, M_icode, M_cnd, M_valE, M_valA, M_dstE, M_dstM, m_stat, m_
        
             
         if (M_icode == 2 || M_icode == 3 || M_icode == 6 || M_icode == 7) begin           //cmovXXX, irmovq, OPq, jXX
+            m_valM = M_valA;
         end
         else if (M_icode == 4 || M_icode == 10) begin   //rmmovq, pushq
             if(M_valE>=0 && M_valE <=2047) begin
