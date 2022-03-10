@@ -37,7 +37,7 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
                 d_srcB = 15;
             end
             4: begin    //rmmovq
-                d_dstE = rB;
+                d_dstE = 15;
                 d_dstM = 15;
                 d_srcA = rA;
                 d_srcB = rB;
@@ -50,7 +50,7 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
             end
             6: begin    //opq
                 d_dstE = rB;
-                d_dstM = rA;
+                d_dstM = 15;
                 d_srcA = rA;
                 d_srcB = rB;
             end
@@ -91,37 +91,37 @@ module decode(D_stat, D_icode, D_ifun, rA, rB, D_valC, D_valP, e_dstE, e_valE, M
         if(D_icode == 8 || D_icode == 7) begin
             d_valA = D_valP;
         end
-        if(d_srcA == e_dstE) begin
+        else if(d_srcA == e_dstE && e_dstE != 15) begin
             d_valA = e_valE;
         end
-        if(d_srcA == M_dstM) begin
+        else if(d_srcA == M_dstM && M_dstM != 15) begin
             d_valA = m_valM;
         end
-        if(d_srcA == M_dstE) begin
+        else if(d_srcA == M_dstE && M_dstE != 15) begin
             d_valA = M_valE;
         end
-        if(d_srcA == W_dstM) begin
+        else if(d_srcA == W_dstM && W_dstM != 15) begin
             d_valA = W_valM;
         end
-        if(d_srcA == W_dstE) begin
+        else if(d_srcA == W_dstE && W_dstE != 15) begin
             d_valA = W_valE;
         end
 
         d_valB = d_rvalB;
 
-        if(d_srcB == e_dstE) begin
+        if(d_srcB == e_dstE && e_dstE != 15) begin
             d_valB = e_valE;
         end
-        if(d_srcB == M_dstM) begin
+        else if(d_srcB == M_dstM && M_dstM != 15) begin
             d_valB = m_valM;
         end
-        if(d_srcB == M_dstE) begin
+        else if(d_srcB == M_dstE && M_dstE != 15) begin
             d_valB = M_valE;
         end
-        if(d_srcB == W_dstM) begin
+        else if(d_srcB == W_dstM && W_dstM != 15) begin
             d_valB = W_valM;
         end
-        if(d_srcB == W_dstE) begin
+        else if(d_srcB == W_dstE && W_dstE != 15) begin
             d_valB = W_valE;
         end
          

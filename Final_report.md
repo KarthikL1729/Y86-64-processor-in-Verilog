@@ -30,6 +30,8 @@ The processor has 2kB of instruction memory, 14 registers and 2kB of data memory
 - `ret`
 - `pushq`
 - `popq`
+
+
 - Stalling
 - Bubble
 - PC prediction
@@ -71,13 +73,13 @@ Thus, the inputs and outputs to this stage are as follows:
 - `inst`: register that is used to fetch 10 bytes from `insmem` at the location pointed to by PC
 - Forwarded values from future stages, which are used in PC preditcion and selection
 
-The instructions are hardcoded into the processor in this stage in an `initial` block.
+The instructions are hardcoded into the processor in this stage in an `initial` block as the instruction memory is local to the fetch stage.
 
 \pagebreak
 
 ## Stage 2: Decode
 
-In this stage, the instruction is decoded from the `icode` value and the required values (usually `valA` and `valB`) are obtained from the registers `rA` and `rB` which are read from the central register bank according to operand specifiers that were obtained from the fetch stage. The stack pointer is also required for a few of these instructions. Data forwarding is also used here from further stages, as decode is where we require the updated values for instructions. We have also only accessed `regarr` here, and hence, all the operations for the write back stage have been taken care of here as well.
+In this stage, the instruction is decoded from the `icode` value and the required values (usually `valA` and `valB`) are obtained from the registers `rA` and `rB` which are read from the central register bank according to operand specifiers that were obtained from the fetch stage. The stack pointer is also required for a few of these instructions. Data forwarding is also used here from further stages, as decode is where we require the updated values for instructions. We have also only accessed `regarr` here, and hence, all the operations for the write back stage have been taken care of here as well. Essentially, due to the presence of the reg file in this stage, the writeback operation from the writeback stage also occurs here. This is the stage that varies the most from its SEQ implementation, as the processes of data forwarding have been added, and the stage has been merged (on a hardware level) with the writeback stage.
 
 ### Inputs
 
@@ -151,7 +153,7 @@ The ALU is instantiated in this stage, and the results of computations on `valA`
 
 ## Stage 4: Memory
 
-The portion of instructions that require the altering of or reading from data memory is done in this stage. It is here that we interact with the actual memory of the device with read and write operations. The `fwd` variables are essentially the same as outputs of the stage, except they are sent without any alteration as a forwarded value to other stages.
+The portion of instructions that require the altering of or reading from data memory is done in this stage. It is here that we interact with the actual memory of the device with read and write operations. The `fwd` variables are essentially the same as outputs of the stage, except they are sent without any alteration as a forwarded value to other stages, notably to the decode stage.
 
 ### Inputs
 
@@ -177,13 +179,13 @@ The portion of instructions that require the altering of or reading from data me
 
 ### Other Parameters
 
-- `datamem`
+- `datamem`: a register that serves as the data memory and is local to the memory stage. 
 
 \pagebreak
 
 ## Stage 5: Write Back
 
-Writes either `valE` or `valM` to the required registers in the instructions that call for it. Therefore, this stage handles register updates.
+Writes either `valE` or `valM` to the required registers in the instructions that call for it. Therefore, this stage handles register updates. These updates are done by accessing the register write functionality in the reg file implemented in the decode block.
 
 ### Inputs
 
@@ -209,7 +211,7 @@ Writes either `valE` or `valM` to the required registers in the instructions tha
 
 The `processor.v` file includes all the required files for all the stages as well as the register bank. This code is mainly meant to set the status conditions for the processor and to monitor and end execution if necessary. The clock is also controlled by this code with an always statement.
 
-This module takes no arguments as all the required files are included and the modules are instantiated. The value of `PC` is updated in an always block here at the positive edge of the clock, hence beginning execution of the various stages.
+This module takes no arguments as all the required files are included and the modules are instantiated. 
 
 ## Register Array
 
@@ -230,6 +232,34 @@ This module stores the data contained in all 14 registers and stack pointer usin
 - `valA`, value in the register specified by `rA`
 - `valB`, value in the register specified by `rB`
 - `valStk`, value of the stack pointer `%rsp`
+
+## Pipeline Control
+Implemented in `pipectrl.v`, this module is responsible for avoiding and navigating the caveats of pipelining. It sets condition codes for the implementation of stalls and bubbles in the fetch, decode and execution stages where required due to occurrences like load/use hazards, ret instruction processing, as well as navigating mispredicted branches in jump instructions. These condition codes are passed as inputs to the respective registers between stages so that their output values at each positive clock edge can be set accordingly.
+
+### Inputs
+
+- `e_cnd`
+- `d_srcA`
+- `d_srcB`
+- `D_icode`
+- `E_dstM`
+- `E_icode`
+- `M_icode`
+- `m_stat`
+- `W_stat`
+
+### Outputs
+
+- `F_stall` 
+- `D_bubble`
+- `D_stall`
+- `E_bubble`
+
+### Other parameters
+
+- `luhaz`: set in case of load/use hazard
+- `inret`: set in case of ret instruction processing
+- `misbranch`: miscalculated branch
 
 ### Results and Outputs
 
